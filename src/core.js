@@ -3,7 +3,7 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { EditorState } from '@codemirror/state'
 import { EditorView, keymap } from '@codemirror/view'
-import sampleMd from './sample.md?raw'
+import sampleMd from '../sample.md?raw'
 import { editorThemeExtensions } from './style.js'
 
 const readDefaultMarkdown = async () => sampleMd || '# markon\n\nStart typing...'
