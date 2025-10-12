@@ -1,5 +1,11 @@
 import { createEventHandler, createElement, createClickHandler } from './utils.js'
 
+const SNAP_THRESHOLD = 80
+
+const applySnap = (width, maxWidth) =>
+	width < SNAP_THRESHOLD ? 0 :
+	width > maxWidth - SNAP_THRESHOLD ? maxWidth : width
+
 // Layout utilities
 const setPreviewWidth = (width, wrap) => {
 	// Allow preview to expand to full width
@@ -57,10 +63,16 @@ export const createResizeHandler = (split, previewAside, wrap, previewManager) =
 		removeMoveListener()
 		removeUpListener()
 
-		// Update the preview manager's internal state
 		const finalWidth = previewAside.getBoundingClientRect().width
+		const maxWidth = wrap.getBoundingClientRect().width - 10
+		const snappedWidth = applySnap(finalWidth, maxWidth)
+
+		if (snappedWidth !== finalWidth) {
+			setPreviewWidth(snappedWidth, wrap)
+		}
+
 		if (previewManager) {
-			previewManager.width = finalWidth
+			previewManager.width = snappedWidth
 		}
 	}
 
