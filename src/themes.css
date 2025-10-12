@@ -255,6 +255,57 @@ html[data-theme="dracula"][data-mode="light"] {
 	--error: #ff5555;
 }
 
+/* Solarized Theme (Classic Warm/Cool Palette) */
+html[data-theme="solarized"][data-mode="dark"] {
+	--bg: #002b36;
+	--bg-light: #073642;
+	--text: #839496;
+	--brand: #d33682;
+	--accent: #268bd2;
+	--primary: #b58900;
+	--secondary: #859900;
+	--comment: #586e75;
+	--meta: #d33682;
+	--operator: #cb4b16;
+	--keyword: #d33682;
+	--regex: #dc322f;
+	--property: #268bd2;
+	--string: #859900;
+	--literal: #b58900;
+	--hint: #2aa198;
+
+	/* semantic colors */
+	--success: #859900;
+	--warning: #b58900;
+	--info: #268bd2;
+	--error: #dc322f;
+}
+
+html[data-theme="solarized"][data-mode="light"] {
+	--bg: #fdf6e3;
+	--bg-light: #eee8d5;
+	--text: #657b83;
+	--brand: #d33682;
+	--accent: #268bd2;
+	--primary: #b58900;
+	--secondary: #859900;
+	--comment: #93a1a1;
+	--meta: #d33682;
+	--operator: #cb4b16;
+	--keyword: #d33682;
+	--regex: #dc322f;
+	--property: #268bd2;
+	--string: #859900;
+	--literal: #b58900;
+	--hint: #2aa198;
+
+	/* semantic colors */
+	--success: #859900;
+	--warning: #b58900;
+	--info: #268bd2;
+	--error: #dc322f;
+}
+
 /* Default theme fallback (Panda dark) */
 html:not([data-theme]) {
 	--bg: #261636;

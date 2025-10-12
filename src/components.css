@@ -195,16 +195,16 @@ button {
 
 /* Settings dialog - native HTML dialog element */
 #settings-system {
-  background: var(--bg-light);
+  background: transparent;
   border-radius: var(--radius);
   padding: 32px;
-  max-width: 800px;
+  max-width: 960px;
   width: 90vw;
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: var(--shadow-strong);
   backdrop-filter: blur(10px);
-  border: 1px solid var(--text-alpha);
+  border: none;
   color: var(--text);
 
   /* Remove default dialog styling */

@@ -13,11 +13,42 @@ const HOTKEYS = [
 
 // Theme configuration
 const THEMES = [
-	{ id: 'panda', name: 'Panda', description: 'Vibrant colors' },
-	{ id: 'muted', name: 'Muted', description: 'Softer tones' },
-	{ id: 'nord', name: 'Nord', description: 'Cool blues' },
-	{ id: 'monokai', name: 'Monokai', description: 'Warm oranges' },
-	{ id: 'dracula', name: 'Dracula', description: 'Purple pinks' },
+	{
+		id: 'panda',
+		name: 'Panda',
+		description: 'Vibrant colors',
+		colors: ['#ff4488', '#8866ff', '#ccaa22', '#22aa88', '#22aa88']
+	},
+	{
+		id: 'muted',
+		name: 'Muted',
+		description: 'Softer tones',
+		colors: ['#b3667a', '#7a7ab3', '#a3a366', '#66a3a3', '#7ab37a']
+	},
+	{
+		id: 'nord',
+		name: 'Nord',
+		description: 'Cool blues',
+		colors: ['#88c0d0', '#5e81ac', '#ebcb8b', '#a3be8c', '#a3be8c']
+	},
+	{
+		id: 'monokai',
+		name: 'Monokai',
+		description: 'Warm oranges',
+		colors: ['#f92672', '#66d9ef', '#e6db74', '#a6e22e', '#e6db74']
+	},
+	{
+		id: 'dracula',
+		name: 'Dracula',
+		description: 'Purple pinks',
+		colors: ['#ff79c6', '#8be9fd', '#f1fa8c', '#50fa7b', '#f1fa8c']
+	},
+	{
+		id: 'solarized',
+		name: 'Solarized',
+		description: 'warm/cool',
+		colors: ['#d33682', '#268bd2', '#b58900', '#859900', '#859900']
+	},
 ]
 
 // Settings dialog creation
@@ -62,7 +93,7 @@ export const createSettingsDialog = () => {
 		textContent: 'markon'
 	})
 	const text4 = document.createTextNode(' · v')
-	const version = createElement('span', { 
+	const version = createElement('span', {
 		textContent: pkg.version,
 		style: 'color: var(--comment); font-weight: 600;'
 	})
@@ -148,11 +179,10 @@ const createThemesSection = () => {
 
 		// Color preview
 		const colorPreview = createElement('div', { className: 'settings-theme-preview' })
-		const colors = ['--brand', '--accent', '--primary', '--secondary', '--string']
-		colors.forEach(colorVar => {
+		theme.colors.forEach(color => {
 			const colorDot = createElement('div', {
 				className: 'settings-theme-color',
-				style: `background-color: var(${colorVar})`
+				style: `background-color: ${color}`
 			})
 			colorPreview.appendChild(colorDot)
 		})
