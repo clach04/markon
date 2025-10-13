@@ -3,12 +3,13 @@ import pkg from '../package.json'
 import './settings.css'
 
 const HOTKEYS = [
-	['t', 'Toggle theme', 'toggle-theme'],
-	['s', 'Toggle spell check', 'toggle-spell'],
-	['p', 'Toggle preview', 'toggle-preview'],
-	['c', 'Copy to clipboard', 'copy-to-clipboard'],
-	['f', 'Save to file', 'save-to-file'],
-	['o', 'Open file', 'load-from-file'],
+	['ctrl+t', 'Toggle theme', 'toggle-theme'],
+	['ctrl+k', 'Toggle spell check', 'toggle-spell'],
+	['ctrl+p', 'Toggle preview', 'preview-toggle'],
+	['ctrl+shift+c', 'Copy to clipboard', 'copy-to-clipboard'],
+	['ctrl+s', 'Save to file', 'save-to-file'],
+	['ctrl+o', 'Open file', 'load-from-file'],
+	['ctrl+shift+v', 'Load from clipboard', 'load-from-clipboard'],
 ]
 
 

@@ -17,9 +17,12 @@ import { injectCustomThemesCSS } from './utils.js'
 const boot = async () => {
 	injectCustomThemesCSS()
 
-	const { getMarkdown, setMarkdown, onMarkdownUpdated } = await createEditor()
+	const { getMarkdown, setMarkdown, onMarkdownUpdated, cleanup } = await createEditor()
 	const { previewHtml } = await initUI({ getMarkdown, setMarkdown })
 	setupPreview({ getMarkdown, onMarkdownUpdated, previewHtml })
+
+	// Cleanup storage on page unload
+	window.addEventListener('beforeunload', cleanup)
 }
 
 boot()

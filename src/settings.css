@@ -81,7 +81,7 @@
 /* Shortcuts */
 .settings-shortcuts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 12px;
   align-items: center;
 }
@@ -111,15 +111,17 @@
 .settings-key {
   background: var(--primary);
   border: none;
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 14px;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
   font-family: "Monaspace Krypton", ui-monospace, monospace;
   color: var(--bg);
   font-weight: 600;
-  min-width: 32px;
+  min-width: 28px;
   text-align: center;
   box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 30%, transparent);
+  white-space: nowrap;
+  display: inline-block;
 }
 
 
