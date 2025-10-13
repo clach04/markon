@@ -1,21 +1,17 @@
 :root {
-	/* layout tokens */
 	--bar-h: 50px;
 	--radius: 14px;
 	--pad: 8px;
 
-	/* derived values */
-	--bg-alpha: color-mix(in srgb, var(--bg) 60%, transparent);
-	--text-alpha: color-mix(in srgb, var(--text) 8%, transparent);
-	--accent-alpha: color-mix(in srgb, var(--accent) 25%, transparent);
-	--brand-alpha: color-mix(in srgb, var(--brand) 28%, transparent);
+	--bg-alpha: color-mix(in srgb, var(--bg) 30%, transparent);
+	--text-alpha: color-mix(in srgb, var(--text) 10%, transparent);
+	--accent-alpha: color-mix(in srgb, var(--accent) 20%, transparent);
+	--brand-alpha: color-mix(in srgb, var(--brand) 30%, transparent);
 
-	/* shadows and overlays */
 	--shadow: 0 0 20px currentColor;
 	--shadow-strong: 0 0 24px color-mix(in srgb, black 32%, transparent);
 }
 
-/* Base styles */
 html {
 	font-family: "Monaspace Krypton", system-ui, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -37,7 +33,6 @@ body {
 	width: 100%;
 }
 
-/* Global scrollbars */
 * {
 	scrollbar-width: thin;
 	scrollbar-color: var(--bg) var(--bg-light);

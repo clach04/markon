@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img valign="middle" src="public/wordmark.png" alt="logo" height="64" />
+    <img valign="middle" src="https://github.com/metaory/markon/blob/master/public/wordmark.png?raw=true" alt="logo" height="64" />
   </h1>
   <strong>
     Minimal distraction free local markdown live editor
@@ -9,7 +9,7 @@
   <h3>
     <a href="https://metaory.github.io/markon">metaory.github.io/markon</a>
   </h3>
-  <img valign="middle" src="public/screenshots.png" alt="screenshot" width="96%" />
+  <img valign="middle" src="https://github.com/metaory/markon/blob/master/public/screenshots.png?raw=true" alt="screenshot" width="96%" />
   <br>
   Public Preview
 </div>
@@ -42,7 +42,7 @@
 | `Ctrl/Cmd + K` | Toggle spellcheck |
 | `Ctrl/Cmd + Shift + C` | Copy to clipboard |
 | `Ctrl/Cmd + Shift + V` | Load from clipboard |
-| `Shift + ?` | Open settings |
+| `Ctrl/Cmd + /` | Open settings |
 
 > [!TIP]
 > All content is automatically saved to localStorage - no data loss!
@@ -197,7 +197,7 @@ echo "Even code blocks work!"
 
 ### Images
 
-![Markon Logo](public/logo.png)
+![Markon Logo](https://raw.githubusercontent.com/metaory/markon/refs/heads/master/public/logo.png?raw=true)
 
 ---
 

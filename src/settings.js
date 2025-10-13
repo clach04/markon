@@ -3,6 +3,7 @@ import pkg from '../package.json'
 import './settings.css'
 
 const HOTKEYS = [
+	['ctrl+/', 'Open settings', 'settings'],
 	['ctrl+t', 'Toggle theme', 'toggle-theme'],
 	['ctrl+k', 'Toggle spell check', 'toggle-spell'],
 	['ctrl+p', 'Toggle preview', 'preview-toggle'],
@@ -247,7 +248,7 @@ export const createSettingsIcon = settingsDialog => {
 	const icon = createElement('iconify-icon', {
 		icon: 'solar:settings-bold',
 		className: 'settings-icon',
-		title: 'Settings (?)',
+		title: 'Settings (Ctrl+/)',
 		width: '36',
 	})
 	createClickHandler(icon, () => settingsDialog.show())

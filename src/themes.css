@@ -7,7 +7,7 @@ html[data-theme="panda"][data-mode="dark"] {
 	--text: #f0f0e8;
 	--brand: #ff4488;
 	--accent: #8866ff;
-	--primary: #ccaa22;
+	--primary: #bb66ff;
 	--secondary: #22aa88;
 	--comment: #bbbbbb;
 	--meta: #ff4488;
@@ -31,7 +31,7 @@ html[data-theme="panda"][data-mode="light"] {
 	--text: #1a1a1a;
 	--brand: #d73a49;
 	--accent: #0366d6;
-	--primary: #e36209;
+	--primary: #8b5cf6;
 	--secondary: #28a745;
 	--comment: #6a737d;
 	--meta: #d73a49;
@@ -56,7 +56,7 @@ html[data-theme="muted"][data-mode="dark"] {
 	--text: #e0e0e0;
 	--brand: #b3667a;
 	--accent: #7a7ab3;
-	--primary: #a3a366;
+	--primary: #a855f7;
 	--secondary: #66a3a3;
 	--comment: #888888;
 	--meta: #b3667a;
@@ -80,7 +80,7 @@ html[data-theme="muted"][data-mode="light"] {
 	--text: #333333;
 	--brand: #8c4a5a;
 	--accent: #5a5a8c;
-	--primary: #8c7a4a;
+	--primary: #9333ea;
 	--secondary: #5a8c5a;
 	--comment: #666666;
 	--meta: #8c4a5a;
@@ -105,7 +105,7 @@ html[data-theme="nord"][data-mode="dark"] {
 	--text: #d8dee9;
 	--brand: #88c0d0;
 	--accent: #5e81ac;
-	--primary: #ebcb8b;
+	--primary: #c084fc;
 	--secondary: #a3be8c;
 	--comment: #6c7a8a;
 	--meta: #88c0d0;
@@ -129,7 +129,7 @@ html[data-theme="nord"][data-mode="light"] {
 	--text: #2e3440;
 	--brand: #5e81ac;
 	--accent: #88c0d0;
-	--primary: #d08770;
+	--primary: #a855f7;
 	--secondary: #a3be8c;
 	--comment: #4c566a;
 	--meta: #5e81ac;
@@ -154,7 +154,7 @@ html[data-theme="monokai"][data-mode="dark"] {
 	--text: #f8f8f2;
 	--brand: #f92672;
 	--accent: #66d9ef;
-	--primary: #e6db74;
+	--primary: #d8b4fe;
 	--secondary: #a6e22e;
 	--comment: #75715e;
 	--meta: #f92672;
@@ -178,7 +178,7 @@ html[data-theme="monokai"][data-mode="light"] {
 	--text: #272822;
 	--brand: #f92672;
 	--accent: #66d9ef;
-	--primary: #e6db74;
+	--primary: #d8b4fe;
 	--secondary: #a6e22e;
 	--comment: #75715e;
 	--meta: #f92672;
@@ -203,7 +203,7 @@ html[data-theme="dracula"][data-mode="dark"] {
 	--text: #f8f8f2;
 	--brand: #ff79c6;
 	--accent: #8be9fd;
-	--primary: #f1fa8c;
+	--primary: #e879f9;
 	--secondary: #50fa7b;
 	--comment: #6272a4;
 	--meta: #ff79c6;
@@ -227,7 +227,7 @@ html[data-theme="dracula"][data-mode="light"] {
 	--text: #282a36;
 	--brand: #ff79c6;
 	--accent: #8be9fd;
-	--primary: #f1fa8c;
+	--primary: #e879f9;
 	--secondary: #50fa7b;
 	--comment: #6272a4;
 	--meta: #ff79c6;
@@ -252,7 +252,7 @@ html[data-theme="solarized"][data-mode="dark"] {
 	--text: #839496;
 	--brand: #d33682;
 	--accent: #268bd2;
-	--primary: #b58900;
+	--primary: #c084fc;
 	--secondary: #859900;
 	--comment: #586e75;
 	--meta: #d33682;
@@ -276,7 +276,7 @@ html[data-theme="solarized"][data-mode="light"] {
 	--text: #657b83;
 	--brand: #d33682;
 	--accent: #268bd2;
-	--primary: #b58900;
+	--primary: #c084fc;
 	--secondary: #859900;
 	--comment: #93a1a1;
 	--meta: #d33682;
@@ -301,7 +301,7 @@ html[data-theme="github"][data-mode="dark"] {
 	--text: #e6edf3;
 	--brand: #f85149;
 	--accent: #58a6ff;
-	--primary: #ffa657;
+	--primary: #d8b4fe;
 	--secondary: #7ee787;
 	--comment: #7d8590;
 	--meta: #f85149;
@@ -325,7 +325,7 @@ html[data-theme="github"][data-mode="light"] {
 	--text: #24292f;
 	--brand: #d73a49;
 	--accent: #0969da;
-	--primary: #e36209;
+	--primary: #8b5cf6;
 	--secondary: #28a745;
 	--comment: #6a737d;
 	--meta: #d73a49;
@@ -350,7 +350,7 @@ html[data-theme="one-dark"][data-mode="dark"] {
 	--text: #abb2bf;
 	--brand: #e06c75;
 	--accent: #61afef;
-	--primary: #e5c07b;
+	--primary: #c084fc;
 	--secondary: #98c379;
 	--comment: #5c6370;
 	--meta: #e06c75;
@@ -374,7 +374,7 @@ html[data-theme="one-dark"][data-mode="light"] {
 	--text: #383a42;
 	--brand: #e45649;
 	--accent: #0184bc;
-	--primary: #c18401;
+	--primary: #a855f7;
 	--secondary: #50a14f;
 	--comment: #a0a1a7;
 	--meta: #e45649;
@@ -399,7 +399,7 @@ html[data-theme="gruvbox"][data-mode="dark"] {
 	--text: #ebdbb2;
 	--brand: #fb4934;
 	--accent: #83a598;
-	--primary: #fabd2f;
+	--primary: #e879f9;
 	--secondary: #b8bb26;
 	--comment: #928374;
 	--meta: #fb4934;
@@ -423,7 +423,7 @@ html[data-theme="gruvbox"][data-mode="light"] {
 	--text: #3c3836;
 	--brand: #cc241d;
 	--accent: #458588;
-	--primary: #d79921;
+	--primary: #c084fc;
 	--secondary: #98971a;
 	--comment: #928374;
 	--meta: #cc241d;
@@ -448,7 +448,7 @@ html[data-theme="tokyo-night"][data-mode="dark"] {
 	--text: #a9b1d6;
 	--brand: #f7768e;
 	--accent: #7aa2f7;
-	--primary: #e0af68;
+	--primary: #d8b4fe;
 	--secondary: #9ece6a;
 	--comment: #565f89;
 	--meta: #f7768e;
@@ -472,7 +472,7 @@ html[data-theme="tokyo-night"][data-mode="light"] {
 	--text: #2d3748;
 	--brand: #e53e3e;
 	--accent: #3182ce;
-	--primary: #d69e2e;
+	--primary: #a855f7;
 	--secondary: #38a169;
 	--comment: #718096;
 	--meta: #e53e3e;
@@ -497,7 +497,7 @@ html:not([data-theme]) {
 	--text: #f0f0e8;
 	--brand: #ff4488;
 	--accent: #8866ff;
-	--primary: #ccaa22;
+	--primary: #bb66ff;
 	--secondary: #22aa88;
 	--comment: #bbbbbb;
 	--meta: #ff4488;

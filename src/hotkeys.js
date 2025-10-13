@@ -11,15 +11,7 @@ export const createKeyHandler = settingsDialog => e => {
 	const hasCtrl = e.ctrlKey || e.metaKey
 	const hasShift = e.shiftKey
 
-	// Special keys
-	switch (key) {
-		case '?':
-			if (hasShift) {
-				e.preventDefault()
-				settingsDialog.show()
-			}
-			return
-	}
+	// Special keys handled by regular hotkey system
 
 	// Build modifier string
 	let modifierString = ''
@@ -32,6 +24,12 @@ export const createKeyHandler = settingsDialog => e => {
 	if (hotkey) {
 		e.preventDefault()
 		const [, , targetId] = hotkey
+
+		// Special handling for settings
+		if (targetId === 'settings') {
+			settingsDialog.show()
+			return
+		}
 
 		// Special handling for toggle-preview
 		if (targetId === 'preview-toggle' && window.previewManager) {

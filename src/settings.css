@@ -2,7 +2,7 @@
 
 /* Settings dialog - native HTML dialog element */
 #settings-system {
-  background: transparent;
+  background: var(--bg-alpha);
   border-radius: var(--radius);
   padding: 32px;
   max-width: 960px;
