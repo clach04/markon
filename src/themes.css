@@ -1,6 +1,5 @@
 /* ===== THEME DEFINITIONS ===== */
 
-/* Panda Theme */
 html[data-theme="panda"][data-mode="dark"] {
 	--bg: #1a0f1f;
 	--bg-light: #2d1a2d;
@@ -49,7 +48,6 @@ html[data-theme="panda"][data-mode="light"] {
 	--error: #cc6600;
 }
 
-/* Muted Theme */
 html[data-theme="muted"][data-mode="dark"] {
 	--bg: #1a1a1a;
 	--bg-light: #2a2a2a;
@@ -98,7 +96,6 @@ html[data-theme="muted"][data-mode="light"] {
 	--error: #8c4a5a;
 }
 
-/* Nord Theme */
 html[data-theme="nord"][data-mode="dark"] {
 	--bg: #2e3440;
 	--bg-light: #3b4252;
@@ -147,7 +144,6 @@ html[data-theme="nord"][data-mode="light"] {
 	--error: #bf616a;
 }
 
-/* Monokai Theme */
 html[data-theme="monokai"][data-mode="dark"] {
 	--bg: #272822;
 	--bg-light: #3e3d32;
@@ -173,30 +169,29 @@ html[data-theme="monokai"][data-mode="dark"] {
 }
 
 html[data-theme="monokai"][data-mode="light"] {
-	--bg: #f8f8f2;
-	--bg-light: #ffffff;
-	--text: #272822;
-	--brand: #f92672;
-	--accent: #66d9ef;
-	--primary: #d8b4fe;
-	--secondary: #a6e22e;
-	--comment: #75715e;
-	--meta: #f92672;
-	--operator: #f92672;
-	--keyword: #f92672;
-	--regex: #fd971f;
-	--property: #66d9ef;
-	--string: #e6db74;
-	--literal: #ae81ff;
-	--hint: #a6e22e;
+  --bg: #fbf8f2;
+  --bg-light: #ffffff;
+  --text: #2b2a28;
+  --brand: #c6286b;
+  --accent: #006b8f;
+  --primary: #6f42c1;
+  --secondary: #2d8f3a;
+  --comment: #6a737d;
+  --meta: #c6286b;
+  --operator: #c6286b;
+  --keyword: #c6286b;
+  --regex: #d65a07;
+  --property: #006b8f;
+  --string: #8a5b00;
+  --literal: #a66bff;
 
-	--success: #28a745;
-	--warning: #e36209;
-	--info: #005cc5;
-	--error: #d73a49;
+  --hint: #2d8f3a;
+  --success: #2d8f3a;
+  --warning: #d65a07;
+  --info: #006b8f;
+  --error: #c6286b;
 }
 
-/* Dracula Theme */
 html[data-theme="dracula"][data-mode="dark"] {
 	--bg: #282a36;
 	--bg-light: #44475a;
@@ -222,30 +217,30 @@ html[data-theme="dracula"][data-mode="dark"] {
 }
 
 html[data-theme="dracula"][data-mode="light"] {
-	--bg: #f8f8f2;
-	--bg-light: #ffffff;
-	--text: #282a36;
-	--brand: #ff79c6;
-	--accent: #8be9fd;
-	--primary: #e879f9;
-	--secondary: #50fa7b;
-	--comment: #6272a4;
-	--meta: #ff79c6;
-	--operator: #ff79c6;
-	--keyword: #ff79c6;
-	--regex: #ffb86c;
-	--property: #8be9fd;
-	--string: #f1fa8c;
-	--literal: #bd93f9;
-	--hint: #50fa7b;
+  --bg: #f4f7fb;
+  --bg-light: #ffffff;
+  --text: #26272b;
+  --brand: #b0476a;
+  --accent: #0366d6;
+  --primary: #8b5cf6;
+  --secondary: #238a4b;
+  --comment: #6a737d;
+  --meta: #b0476a;
+  --operator: #b0476a;
+  --keyword: #b0476a;
+  --regex: #e36209;
+  --property: #0366d6;
+  --string: #0b3a62;
+  --literal: #6f42c1;
+  --hint: #238a4b;
 
-	--success: #50fa7b;
-	--warning: #ffb86c;
-	--info: #8be9fd;
-	--error: #ff5555;
+  --success: #238a4b;
+  --warning: #e36209;
+  --info: #0366d6;
+  --error: #b0476a;
 }
 
-/* Solarized Theme */
+
 html[data-theme="solarized"][data-mode="dark"] {
 	--bg: #002b36;
 	--bg-light: #073642;
@@ -294,7 +289,6 @@ html[data-theme="solarized"][data-mode="light"] {
 	--error: #dc322f;
 }
 
-/* GitHub Theme */
 html[data-theme="github"][data-mode="dark"] {
 	--bg: #0d1117;
 	--bg-light: #161b22;
@@ -343,7 +337,6 @@ html[data-theme="github"][data-mode="light"] {
 	--error: #d73a49;
 }
 
-/* One Dark Theme */
 html[data-theme="one-dark"][data-mode="dark"] {
 	--bg: #282c34;
 	--bg-light: #21252b;
@@ -392,7 +385,6 @@ html[data-theme="one-dark"][data-mode="light"] {
 	--error: #e45649;
 }
 
-/* Gruvbox Theme */
 html[data-theme="gruvbox"][data-mode="dark"] {
 	--bg: #282828;
 	--bg-light: #3c3836;
@@ -441,7 +433,6 @@ html[data-theme="gruvbox"][data-mode="light"] {
 	--error: #cc241d;
 }
 
-/* Tokyo Night Theme */
 html[data-theme="tokyo-night"][data-mode="dark"] {
 	--bg: #1a1b26;
 	--bg-light: #24283b;

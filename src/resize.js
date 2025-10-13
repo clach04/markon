@@ -6,16 +6,13 @@ const applySnap = (width, maxWidth) =>
 	width < SNAP_THRESHOLD ? 0 :
 	width > maxWidth - SNAP_THRESHOLD ? maxWidth : width
 
-// Layout utilities
 const setPreviewWidth = (width, wrap) => {
-	// Allow preview to expand to full width
 	const finalWidth = Math.max(width, 0)
-	wrap.style.gridTemplateColumns = `1fr 10px ${finalWidth}px`
+	wrap.style.gridTemplateColumns = `1fr 14px ${finalWidth}px`
 }
 
-// Preview manager
 export const createPreviewManager = (wrap) => {
-	let _width = 400 // Start with preview open
+	let _width = 250
 	const previewToggle = document.getElementById('preview-toggle')
 
 	const setWidth = newWidth => {
@@ -26,10 +23,8 @@ export const createPreviewManager = (wrap) => {
 
 	const toggle = () => setWidth(_width === 0 ? 400 : 0)
 
-	// Add click handler to toggle button
 	createClickHandler(previewToggle, toggle)
 
-	// Initialize with preview open
 	setWidth(_width)
 
 	return {
@@ -40,7 +35,6 @@ export const createPreviewManager = (wrap) => {
 	}
 }
 
-// Resize handler
 export const createResizeHandler = (split, previewAside, wrap, previewManager) => e => {
 	const startX = e.clientX
 	const startWidth = previewAside.getBoundingClientRect().width
@@ -52,7 +46,7 @@ export const createResizeHandler = (split, previewAside, wrap, previewManager) =
 		const newWidth = startWidth + dx
 		const clampedWidth = Math.max(0, newWidth)
 		setPreviewWidth(clampedWidth, wrap)
-		// Update the preview manager's internal state
+
 		if (previewManager) {
 			previewManager.width = clampedWidth
 		}
@@ -64,7 +58,7 @@ export const createResizeHandler = (split, previewAside, wrap, previewManager) =
 		removeUpListener()
 
 		const finalWidth = previewAside.getBoundingClientRect().width
-		const maxWidth = wrap.getBoundingClientRect().width - 10
+		const maxWidth = wrap.getBoundingClientRect().width - 14
 		const snappedWidth = applySnap(finalWidth, maxWidth)
 
 		if (snappedWidth !== finalWidth) {

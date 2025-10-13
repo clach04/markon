@@ -3,12 +3,10 @@
 /* Settings dialog - native HTML dialog element */
 #settings-system {
   background: var(--bg-alpha);
-  border-radius: var(--radius);
+  border-radius: 20px;
   padding: 32px;
-  max-width: 960px;
+  max-width: 700px;
   width: 90vw;
-  max-height: 80vh;
-  overflow-y: auto;
   box-shadow: var(--shadow-strong);
   backdrop-filter: blur(10px);
   border: none;
@@ -61,6 +59,10 @@
 .settings-content {
   display: grid;
   gap: 32px;
+  max-height: calc(70vh - 200px);
+  overflow-y: auto;
+  padding-right: 20px;
+  margin-right: -20px;
 }
 
 .settings-section {
@@ -128,7 +130,7 @@
 /* Theme selector */
 .settings-theme-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 16px;
 }
 
@@ -260,6 +262,16 @@
       color: var(--brand);
     }
   }
+}
+
+.settings-version {
+  color: var(--comment);
+  font-weight: 600;
+  font-family: "Monaspace Krypton", ui-monospace, monospace;
+  font-size: 12px;
+  background: var(--bg-light);
+  border-radius: 4px;
+  padding: 2px 6px;
 }
 
 .settings-icon {

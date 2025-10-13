@@ -391,12 +391,13 @@ button {
   top: 200px;
   z-index: 5;
   opacity: 1;
-  transform: translateX(10px);
+  transform: translateX(12px);
+  filter: invert(1) brightness(60%);
 }
 
 /* Split pane */
 #split {
-  width: 10px;
+  width: 14px;
   cursor: col-resize;
   background: var(--bg-light);
   position: relative;

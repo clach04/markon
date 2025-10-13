@@ -50,10 +50,10 @@ export const createSettingsDialog = () => {
 		target: '_blank',
 		textContent: 'markon'
 	})
-	const text4 = document.createTextNode(' · v')
-	const version = createElement('span', {
-		textContent: pkg.version,
-		style: 'color: var(--comment); font-weight: 600;'
+	const text4 = document.createTextNode(' · ')
+	const version = createElement('kbd', {
+		textContent: `v${pkg.version}`,
+		className: 'settings-version'
 	})
 
 	// Line break

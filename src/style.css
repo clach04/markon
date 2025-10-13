@@ -3,7 +3,7 @@
 	--radius: 14px;
 	--pad: 8px;
 
-	--bg-alpha: color-mix(in srgb, var(--bg) 30%, transparent);
+	--bg-alpha: color-mix(in srgb, var(--bg) 40%, transparent);
 	--text-alpha: color-mix(in srgb, var(--text) 10%, transparent);
 	--accent-alpha: color-mix(in srgb, var(--accent) 20%, transparent);
 	--brand-alpha: color-mix(in srgb, var(--brand) 30%, transparent);
