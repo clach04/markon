@@ -1,0 +1,297 @@
+/* ===== SETTINGS SYSTEM COMPONENTS ===== */
+
+/* Settings dialog - native HTML dialog element */
+#settings-system {
+  background: transparent;
+  border-radius: var(--radius);
+  padding: 32px;
+  max-width: 960px;
+  width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--text);
+
+  /* Remove default dialog styling */
+  &::backdrop {
+    background: var(--bg-alpha);
+  }
+}
+
+/* Settings header */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.settings-title {
+  margin: 0;
+  color: var(--brand);
+  font-size: 24px;
+  font-weight: 700;
+  font-family: Bungee, monospace;
+}
+
+.settings-close {
+  background: var(--text-alpha);
+  border: none;
+  color: var(--comment);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--accent-alpha);
+    color: var(--accent);
+    transform: scale(1.1);
+  }
+}
+
+/* Settings content */
+.settings-content {
+  display: grid;
+  gap: 32px;
+}
+
+.settings-section {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-section-title {
+  margin: 0;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 600;
+  font-family: Bungee, monospace;
+  border-bottom: 1px solid var(--text-alpha);
+  padding-bottom: 8px;
+}
+
+/* Shortcuts */
+.settings-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  align-items: center;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--bg-alpha);
+  border-radius: 16px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    background: var(--accent-alpha);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--accent-alpha);
+  }
+}
+
+.settings-key {
+  background: var(--primary);
+  border: none;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: "Monaspace Krypton", ui-monospace, monospace;
+  color: var(--bg);
+  font-weight: 600;
+  min-width: 32px;
+  text-align: center;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+
+/* Theme selector */
+.settings-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.settings-theme-card {
+  background: var(--bg-alpha);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+
+  &:hover {
+    background: var(--accent-alpha);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--accent-alpha);
+  }
+
+  &.selected {
+    border-color: var(--accent);
+    background: var(--accent-alpha);
+  }
+}
+
+.settings-theme-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-family: "Monaspace Krypton", system-ui, Helvetica, Arial, sans-serif;
+}
+
+.settings-theme-preview {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.settings-theme-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--text-alpha);
+}
+
+.settings-theme-card:has(.settings-theme-control-btn) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-theme-control-btn {
+  width: auto;
+  min-width: 80px;
+  background: transparent;
+  border: none;
+  outline: 2px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: "Monaspace Krypton", system-ui, Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  iconify-icon {
+    opacity: 0.9;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline !important;
+  }
+
+  &:hover {
+    background: var(--accent);
+    color: var(--bg);
+
+    iconify-icon {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.settings-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--text-alpha);
+  color: var(--comment);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Monaspace Krypton", system-ui, Helvetica, Arial, sans-serif;
+
+  .heart {
+    display: inline-block;
+    background: linear-gradient(
+      45deg,
+      #ff4488,
+      #4488ff,
+      #ffdd44,
+      #44ffdd,
+      #ff4488
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 2s ease-in-out infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--brand);
+    }
+  }
+}
+
+.settings-icon {
+  opacity: 0.4;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 28px;
+  color: var(--secondary);
+  font-weight: bold;
+  transition: all 0.3s ease;
+  width: 48px;
+  height: 48px;
+  background: var(--text-alpha);
+  backdrop-filter: blur(10px);
+
+  &::before {
+    content: "";
+    z-index: -1;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    filter: blur(12px);
+  }
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+    background: var(--accent-alpha);
+    color: var(--accent);
+  }
+}

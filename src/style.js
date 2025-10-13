@@ -2,7 +2,6 @@ import { defaultHighlightStyle, HighlightStyle, syntaxHighlighting } from '@code
 import { EditorView } from '@codemirror/view'
 import { tags as t } from '@lezer/highlight'
 
-// CodeMirror theme
 const cmTheme = EditorView.theme({
 	'&': { height: '100%' },
 	'.cm-scroller': {
@@ -17,7 +16,6 @@ const cmTheme = EditorView.theme({
 	},
 })
 
-// Panda syntax groups for highlighting
 const pandaGroups = [
 	['var(--comment)', t.comment, t.blockComment, t.lineComment, t.docComment, t.quote],
 	['var(--primary)', t.angleBracket],
@@ -97,7 +95,6 @@ const pandaGroups = [
 	],
 ]
 
-// Functional approach to create highlight style
 const createHighlightStyle = groups => groups.flatMap(([color, ...tags]) => tags.map(tag => ({ tag, color })))
 
 // Markdown-specific styles

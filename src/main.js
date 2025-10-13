@@ -12,8 +12,11 @@ import './themes.css'
 import { createEditor } from './core.js'
 import { setupPreview } from './preview.js'
 import { initUI } from './ui.js'
+import { injectCustomThemesCSS } from './utils.js'
 
 const boot = async () => {
+	injectCustomThemesCSS()
+
 	const { getMarkdown, setMarkdown, onMarkdownUpdated } = await createEditor()
 	const { previewHtml } = await initUI({ getMarkdown, setMarkdown })
 	setupPreview({ getMarkdown, onMarkdownUpdated, previewHtml })

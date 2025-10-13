@@ -1,7 +1,7 @@
-import { createClickHandler, createElement, getThemesList, applyTheme, getPrefTheme } from './utils.js'
+import { createClickHandler, createElement, applyTheme, getPrefTheme, extractThemesFromCSS, saveCustomThemesCSS, clearCustomThemesCSS, openFileCSS, downloadText } from './utils.js'
 import pkg from '../package.json'
+import './settings.css'
 
-// Hotkey configuration - single source of truth
 const HOTKEYS = [
 	['t', 'Toggle theme', 'toggle-theme'],
 	['s', 'Toggle spell check', 'toggle-spell'],
@@ -11,47 +11,7 @@ const HOTKEYS = [
 	['o', 'Open file', 'load-from-file'],
 ]
 
-// Theme configuration
-const THEMES = [
-	{
-		id: 'panda',
-		name: 'Panda',
-		description: 'Vibrant colors',
-		colors: ['#ff4488', '#8866ff', '#ccaa22', '#22aa88', '#22aa88']
-	},
-	{
-		id: 'muted',
-		name: 'Muted',
-		description: 'Softer tones',
-		colors: ['#b3667a', '#7a7ab3', '#a3a366', '#66a3a3', '#7ab37a']
-	},
-	{
-		id: 'nord',
-		name: 'Nord',
-		description: 'Cool blues',
-		colors: ['#88c0d0', '#5e81ac', '#ebcb8b', '#a3be8c', '#a3be8c']
-	},
-	{
-		id: 'monokai',
-		name: 'Monokai',
-		description: 'Warm oranges',
-		colors: ['#f92672', '#66d9ef', '#e6db74', '#a6e22e', '#e6db74']
-	},
-	{
-		id: 'dracula',
-		name: 'Dracula',
-		description: 'Purple pinks',
-		colors: ['#ff79c6', '#8be9fd', '#f1fa8c', '#50fa7b', '#f1fa8c']
-	},
-	{
-		id: 'solarized',
-		name: 'Solarized',
-		description: 'warm/cool',
-		colors: ['#d33682', '#268bd2', '#b58900', '#859900', '#859900']
-	},
-]
 
-// Settings dialog creation
 export const createSettingsDialog = () => {
 	const dialog = createElement('dialog', {
 		id: 'settings-system',
@@ -59,24 +19,19 @@ export const createSettingsDialog = () => {
 		closedby: 'any' // Allow dismissal by backdrop click, ESC key, or close button
 	})
 
-	// Header
 	const header = createElement('div', { className: 'settings-header' })
 	const title = createElement('h2', { className: 'settings-title', textContent: 'Settings' })
 	const closeBtn = createElement('button', { className: 'settings-close', textContent: '×' })
 	header.append(title, closeBtn)
 
-	// Content sections
 	const content = createElement('div', { className: 'settings-content' })
 
-	// Themes section (moved to top)
 	const themesSection = createThemesSection()
 
-	// Shortcuts section
 	const shortcutsSection = createShortcutsSection()
 
 	content.append(themesSection, shortcutsSection)
 
-	// Footer
 	const footer = createElement('div', { className: 'settings-footer' })
 	const heart = createElement('span', { className: 'heart', textContent: '❤️' })
 	const text1 = document.createTextNode('Made with ')
@@ -122,6 +77,9 @@ export const createSettingsDialog = () => {
 	const show = () => {
 		document.body.appendChild(dialog)
 		dialog.showModal()
+		// Highlight current theme after dialog is shown
+		const themeGrid = dialog.querySelector('.settings-theme-grid')
+		if (themeGrid) highlightCurrentTheme(themeGrid)
 	}
 
 	const hide = () => {
@@ -168,14 +126,16 @@ const createThemesSection = () => {
 	// Theme grid
 	const themeGrid = createElement('div', { className: 'settings-theme-grid' })
 
-	THEMES.forEach(theme => {
+	// Get themes dynamically from CSS
+	const themes = extractThemesFromCSS()
+
+	themes.forEach(theme => {
 		const themeCard = createElement('div', {
-			className: 'settings-theme-card',
+			className: `settings-theme-card theme-${theme.id}`,
 			'data-theme': theme.id
 		})
 
-		const themeName = createElement('div', { className: 'settings-theme-name', textContent: theme.name })
-		const themeDesc = createElement('div', { className: 'settings-theme-desc', textContent: theme.description })
+		const themeName = createElement('div', { className: 'settings-theme-name', textContent: theme.id })
 
 		// Color preview
 		const colorPreview = createElement('div', { className: 'settings-theme-preview' })
@@ -187,32 +147,96 @@ const createThemesSection = () => {
 			colorPreview.appendChild(colorDot)
 		})
 
-		themeCard.append(themeName, themeDesc, colorPreview)
+		themeCard.append(themeName, colorPreview)
 
 		// Add click handler for theme selection
 		themeCard.addEventListener('click', async () => {
 			const currentMode = getPrefTheme().mode
 			await applyTheme(theme.id, currentMode)
-
-			// Update visual selection
-			themeGrid.querySelectorAll('.settings-theme-card').forEach(card => {
-				card.classList.remove('selected')
-			})
-			themeCard.classList.add('selected')
+			highlightCurrentTheme(themeGrid)
 		})
 
 		themeGrid.appendChild(themeCard)
 	})
 
-	// Event handlers
-	const currentTheme = getPrefTheme()
+	// Download card
+	const downloadCard = createElement('div', { className: 'settings-theme-card' })
+	const downloadBtn = createElement('button', {
+		className: 'settings-theme-control-btn',
+		title: 'Download themes.css'
+	})
+	const downloadIcon = createElement('iconify-icon', {
+		icon: 'gravity-ui:caret-down',
+		width: '16',
+		height: '16'
+	})
+	const downloadText = createElement('span', { textContent: 'Download' })
+	downloadBtn.append(downloadIcon, downloadText)
+	downloadCard.appendChild(downloadBtn)
 
-	// Set initial selection
-	const initialCard = themeGrid.querySelector(`[data-theme="${currentTheme.theme}"]`)
-	if (initialCard) initialCard.classList.add('selected')
+	// Upload card
+	const uploadCard = createElement('div', { className: 'settings-theme-card' })
+	const uploadBtn = createElement('button', {
+		className: 'settings-theme-control-btn',
+		title: 'Upload themes.css'
+	})
+	const uploadIcon = createElement('iconify-icon', {
+		icon: 'gravity-ui:caret-up',
+		width: '16',
+		height: '16'
+	})
+	const uploadText = createElement('span', { textContent: 'Upload' })
+	uploadBtn.append(uploadIcon, uploadText)
+	uploadCard.appendChild(uploadBtn)
+
+	// Reset card
+	const resetCard = createElement('div', { className: 'settings-theme-card' })
+	const resetBtn = createElement('button', {
+		className: 'settings-theme-control-btn',
+		textContent: 'Reset',
+		title: 'Reset to built-in themes'
+	})
+	resetCard.appendChild(resetBtn)
+
+	// Event handlers
+	downloadBtn.addEventListener('click', async () => {
+		const { downloadText } = await import('./utils.js')
+
+		// Fetch the original themes.css file directly from GitHub
+		const response = await fetch('https://raw.githubusercontent.com/metaory/markon/refs/heads/master/src/themes.css')
+		const cssToDownload = await response.text()
+		downloadText('themes.css', cssToDownload)
+	})
+
+	uploadBtn.addEventListener('click', async () => {
+		const cssText = await openFileCSS()
+		if (cssText) {
+			saveCustomThemesCSS(cssText)
+			// Refresh the settings dialog to show new themes
+			location.reload()
+		}
+	})
+
+	resetBtn.addEventListener('click', () => {
+		clearCustomThemesCSS()
+		location.reload()
+	})
+
+	// TODO: temporary disable
+	// themeGrid.append(downloadCard, uploadCard, resetCard)
 
 	section.append(sectionTitle, themeGrid)
 	return section
+}
+
+// Highlight current theme in settings dialog
+const highlightCurrentTheme = (themeGrid) => {
+	const currentTheme = document.documentElement.getAttribute('data-theme')
+
+	// Clear all selections and highlight current
+	themeGrid.querySelectorAll('.settings-theme-card').forEach(card => {
+		card.classList.toggle('selected', card.classList.contains(`theme-${currentTheme}`))
+	})
 }
 
 
