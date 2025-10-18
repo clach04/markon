@@ -9,9 +9,9 @@
   <h3>
     <a href="https://metaory.github.io/markon">metaory.github.io/markon</a>
   </h3>
-  <img valign="middle" src="public/screenshots.png" alt="screenshot" width="80%" />
+  <img src="public/screenshots.png" alt="screenshot" width="80%" />
   <br> <br>
-  <img valign="middle" src="public/themes.png" alt="screenshot" width="70%" />
+  <img src="public/themes.png" alt="themes" width="70%" />
   <br>
   <a href="https://metaory.github.io/markon/themes">themes</a>
 </div>
