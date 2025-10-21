@@ -127,7 +127,7 @@ const createPerformanceSection = () => {
 	})
 
 	const profilerIcon = createElement('iconify-icon', {
-		icon: 'tabler:chart-line',
+		icon: 'tabler:gauge-filled',
 		width: '16',
 		height: '16'
 	})
@@ -160,7 +160,7 @@ const createPerformanceSection = () => {
 	})
 
 	const spellIcon = createElement('iconify-icon', {
-		icon: 'tabler:abc',
+		icon: 'tabler:file-text-filled',
 		width: '16',
 		height: '16'
 	})
@@ -189,7 +189,7 @@ const createPerformanceSection = () => {
 	})
 
 	const saveIcon = createElement('iconify-icon', {
-		icon: 'tabler:download',
+		icon: 'tabler:file-download-filled',
 		width: '16',
 		height: '16'
 	})
@@ -216,7 +216,7 @@ const createPerformanceSection = () => {
 	})
 
 	const loadIcon = createElement('iconify-icon', {
-		icon: 'tabler:upload',
+		icon: 'tabler:file-upload-filled',
 		width: '16',
 		height: '16'
 	})

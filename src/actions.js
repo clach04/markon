@@ -39,7 +39,7 @@ const BUTTON_CONFIGS = [
 	[
 		'copy-to-clipboard',
 		'Copy to clipboard',
-		`tabler:copy`,
+		`tabler:copy-filled`,
 		async (_btn, showToast) => {
 			const text = await window.getMarkdown?.()
 			if (text) await copySmart(text, showToast)
@@ -48,7 +48,7 @@ const BUTTON_CONFIGS = [
 	[
 		'load-from-clipboard',
 		'Load from clipboard',
-		`tabler:clipboard-text`,
+		`tabler:clipboard-text-filled`,
 		async (_btn, showToast) => {
 			const text = await window.readClipboardSmart?.()
 			if (text) {
@@ -66,7 +66,7 @@ const BUTTON_CONFIGS = [
 	[
 		'toggle-spell',
 		'Toggle spell check',
-		'tabler:spell-check',
+		'tabler:file-text-filled',
 		(btn, showToast) => {
 			const pressed = btn.getAttribute('aria-pressed') === 'true'
 			btn.setAttribute('aria-pressed', !pressed)
@@ -79,7 +79,7 @@ const BUTTON_CONFIGS = [
 	[
 		'toggle-theme',
 		'Toggle theme',
-		'tabler:sun',
+		'tabler:sun-filled',
 		async (_btn, showToast) => {
 			const current = document.documentElement.getAttribute('data-mode') || 'dark'
 			const next = current === 'light' ? 'dark' : 'light'
@@ -93,7 +93,7 @@ const BUTTON_CONFIGS = [
 	[
 		'save-to-file',
 		'Save to file',
-		`tabler:download`,
+		`tabler:file-download-filled`,
 		async (_btn, showToast) => {
 			const text = await window.getMarkdown?.()
 			if (text) {
@@ -106,7 +106,7 @@ const BUTTON_CONFIGS = [
 	[
 		'load-from-file',
 		'Load from file',
-		`tabler:upload`,
+		`tabler:file-upload-filled`,
 		async (_btn, showToast) => {
 			const text = await openFileText()
 			if (text) {
@@ -118,7 +118,7 @@ const BUTTON_CONFIGS = [
 	[
 		'install-pwa',
 		'Install App',
-		'tabler:download',
+		'tabler:device-desktop-filled',
 		async (btn, showToast) => {
 			if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
 				// Show native install prompt

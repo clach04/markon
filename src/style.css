@@ -55,7 +55,6 @@ body {
 	position: fixed;
 	bottom: 20px;
 	left: 20px;
-	background: rgba(59, 130, 246, 0.15);
 	backdrop-filter: blur(12px);
 	border-radius: 16px;
 	padding: 8px 12px;
@@ -63,7 +62,7 @@ body {
 	font-size: 12px;
 	font-weight: 600;
 	color: white;
-	mix-blend-mode: screen;
+	mix-blend-mode: hard-light;
 	min-width: 20px;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 	z-index: 1000;
