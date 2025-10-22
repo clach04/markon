@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.2, maximum-scale=1.4, user-scalable=yes" />
+  <link rel="manifest" href="/manifest.webmanifest" />
   <title>markon</title>
   <style>
     #splash {
@@ -62,16 +63,22 @@
     </div>
     <div id="actions"> </div>
   </div>
-  <iconify-icon id="bar-pull" icon="tabler:arrows-vertical" width="48"> </iconify-icon>
+  <iconify-icon id="bar-pull" icon="tabler:chevrons-down" width="48"> </iconify-icon>
   <div id="wrap">
     <div id="editor"></div>
     <div id="split" aria-label="Resize">
       <iconify-icon
         id="preview-toggle"
-        icon="tabler:arrows-horizontal"
-        width="40"
+        icon="tabler:square-toggle"
+        width="32"
         class="preview-toggle"
         aria-pressed="true"></iconify-icon>
+      <iconify-icon
+        id="resize-hover-icon"
+        icon="tabler:grip-horizontal"
+        width="32"
+        class="resize-hover-icon"
+        style="pointer-events: none;"></iconify-icon>
       <img
         id="resize-handle"
         src="/drag-handle.svg"
@@ -86,6 +93,7 @@
   </div>
   <div id="toast" hidden></div>
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/dev-dist/registerSW.js"></script>
 </body>
 
 </html>

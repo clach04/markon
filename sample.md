@@ -1,12 +1,9 @@
-<div align="center">
-  <br><img src="https://github.com/metaory/markon/blob/master/public/wordmark.png?raw=true" alt="logo" height="64" />
+# markon
 
-  Minimal distraction free local markdown live editor
+## minimal distraction free local markdown live editor
 
-  [metaory.github.io/markon](https://metaory.github.io/markon)
+[metaory.github.io/markon](https://metaory.github.io/markon)
 
-  <img width="80%" src="https://github.com/metaory/markon/blob/master/public/screenshots.png?raw=true" alt="screenshot" />
-</div>
 
 ---
 
@@ -254,11 +251,6 @@ echo "Even code blocks work!"
 
 ---
 
-### Images
-
-![Markon Logo](https://raw.githubusercontent.com/metaory/markon/refs/heads/master/public/logo.png?raw=true)
-
----
 
 ## Advanced Features
 
@@ -271,9 +263,6 @@ The editor features intelligent split view resizing:
 
 ### Theme System
 
-<div align="center">
-  <img width="80%" src="https://github.com/metaory/markon/blob/master/public/themes.png?raw=true" alt="themes" />
-</div>
 
 Multiple theme presets available:
 - Light themes for bright environments

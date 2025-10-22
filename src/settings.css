@@ -83,7 +83,7 @@
 /* Shortcuts */
 .settings-shortcuts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 12px;
   align-items: center;
 }
@@ -91,8 +91,7 @@
 .settings-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   padding: 16px 20px;
   background: var(--bg-alpha);
   border-radius: 16px;
@@ -274,38 +273,4 @@
   padding: 2px 6px;
 }
 
-.settings-icon {
-  opacity: 0.4;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 1000;
-  font-size: 28px;
-  color: var(--secondary);
-  font-weight: bold;
-  transition: all 0.3s ease;
-  width: 48px;
-  height: 48px;
-  background: var(--text-alpha);
-  backdrop-filter: blur(10px);
-
-  &::before {
-    content: "";
-    z-index: -1;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    filter: blur(12px);
-  }
-
-  &:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-    background: var(--accent-alpha);
-    color: var(--accent);
-  }
-}
+/* Settings icon is now a toolbar button, no special styles needed */

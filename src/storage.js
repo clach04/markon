@@ -1,74 +1,99 @@
-const STORAGE_KEY = 'markon-content'
-const DEBOUNCE_MS = 600
+// Web Worker-based storage - moves localStorage operations off main thread
+let storageWorker = null
+let isWorkerReady = false
 
-const saveToStorage = (content) => {
-	try {
-		localStorage.setItem(STORAGE_KEY, content)
-		return true
-	} catch (e) {
-		console.warn('Failed to save to localStorage:', e)
-		return false
+const createStorageWorker = () => {
+	if (!window.Worker) {
+		console.warn('Web Workers not supported, falling back to main thread storage')
+		return null
 	}
-}
 
-const loadFromStorage = () => {
 	try {
-		return localStorage.getItem(STORAGE_KEY) || null
-	} catch (e) {
-		console.warn('Failed to load from localStorage:', e)
+		const worker = new Worker(new URL('./worker.js', import.meta.url))
+
+		worker.onmessage = (event) => {
+			const { type, content } = event.data
+
+			switch (type) {
+				case 'CONTENT_LOADED':
+					// Worker loaded content from IndexedDB
+					if (content) {
+						window.setMarkdown?.(content)
+					}
+					break
+			}
+		}
+
+		worker.onerror = (error) => {
+			console.error('Storage worker error:', error)
+		}
+
+		return worker
+	} catch (error) {
+		console.warn('Failed to create storage worker:', error)
 		return null
 	}
 }
 
-const createIdleCallback = (fn) =>
-	window.requestIdleCallback ? requestIdleCallback(fn) : setTimeout(fn, 0)
+const loadFromStorage = () => {
+	if (storageWorker && isWorkerReady) {
+		storageWorker.postMessage({ type: 'LOAD_CONTENT' })
+		return null // Content will be set via worker message
+	}
+
+	// No fallback - IndexedDB only
+	console.warn('Storage worker not available')
+	return null
+}
 
 export const createStorage = ({ onMarkdownUpdated, initialContent = '' }) => {
-	let lastSavedContent = initialContent
-	let debounceTimer = null
-	let idleCallbackId = null
-	let isFlushing = false
+	// Initialize worker
+	storageWorker = createStorageWorker()
+
+	if (storageWorker) {
+		isWorkerReady = true
+		console.log('Storage worker initialized')
+	}
 
 	const cleanup = () => {
-		clearTimeout(debounceTimer)
-		cancelIdleCallback?.(idleCallbackId)
-		window.removeEventListener('beforeunload', flush)
+		if (storageWorker) {
+			storageWorker.terminate()
+			storageWorker = null
+			isWorkerReady = false
+		}
+		window.removeEventListener('beforeunload', handleBeforeUnload)
 		document.removeEventListener('visibilitychange', handleVisibilityChange)
 	}
 
-	const handleVisibilityChange = () =>
-		document.visibilityState === 'hidden' && flush()
-
-	const flush = () => {
-		if (isFlushing) return
-		isFlushing = true
-
-		clearTimeout(debounceTimer)
-		cancelIdleCallback?.(idleCallbackId)
-
-		const currentContent = window.getMarkdown?.() || ''
-		if (currentContent !== lastSavedContent) {
-			saveToStorage(currentContent) && (lastSavedContent = currentContent)
+	const handleBeforeUnload = () => {
+		if (storageWorker && isWorkerReady) {
+			const content = window.getMarkdown?.() || ''
+			storageWorker.postMessage({ type: 'FLUSH_NOW', content })
 		}
+	}
 
-		isFlushing = false
+	const handleVisibilityChange = () => {
+		if (document.visibilityState === 'hidden' && storageWorker && isWorkerReady) {
+			const content = window.getMarkdown?.() || ''
+			storageWorker.postMessage({ type: 'FLUSH_NOW', content })
+		}
 	}
 
 	const debouncedSave = (content) => {
-		if (content === lastSavedContent) return
-
-		clearTimeout(debounceTimer)
-		debounceTimer = setTimeout(() => {
-			debounceTimer = null
-			idleCallbackId = createIdleCallback(() => {
-				idleCallbackId = null
-				flush()
-			})
-		}, DEBOUNCE_MS)
+		console.log('Storage: Received content update, length:', content.length)
+		if (storageWorker && isWorkerReady) {
+			// Send to worker for debounced processing
+			console.log('Storage: Sending to worker')
+			storageWorker.postMessage({ type: 'SAVE_CONTENT', content })
+		} else {
+			// No fallback - IndexedDB only
+			console.warn('Storage worker not available, cannot save')
+		}
 	}
 
+	// Set up event listeners
 	onMarkdownUpdated(debouncedSave)
-	window.addEventListener('beforeunload', flush)
+	window.addEventListener('beforeunload', handleBeforeUnload)
 	document.addEventListener('visibilitychange', handleVisibilityChange)
 
 	return { load: loadFromStorage, cleanup }

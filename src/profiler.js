@@ -4,6 +4,7 @@ const BUFFER_SIZE = 20
 class LatencyProfiler {
 	constructor() {
 		this.inputStartTime = null
+		this.renderStartTime = null
 		this.measurements = []
 		this.overlay = null
 		this.isVisible = localStorage.getItem(STORAGE_KEY) === 'true'
@@ -14,13 +15,24 @@ class LatencyProfiler {
 		this.inputStartTime = performance.now()
 	}
 
+	markRenderStart() {
+		this.renderStartTime = performance.now()
+	}
+
 	markRenderComplete() {
-		if (!this.inputStartTime) return
-		
-		const latency = performance.now() - this.inputStartTime
-		this.addMeasurement(latency)
+		if (!this.renderStartTime) return
+
+		const renderLatency = performance.now() - this.renderStartTime
+		this.addMeasurement(renderLatency)
 		this.updateOverlay()
+		this.renderStartTime = null
 		this.inputStartTime = null
+	}
+
+	// Get total time from input to render completion (including debouncing)
+	getTotalLatency() {
+		if (!this.inputStartTime) return null
+		return performance.now() - this.inputStartTime
 	}
 
 	addMeasurement(latency) {
@@ -32,13 +44,13 @@ class LatencyProfiler {
 
 	updateOverlay() {
 		if (!this.overlay || !this.isVisible) return
-		
+
 		const latest = this.measurements[this.measurements.length - 1]
 		if (!latest) return
 
 		const ms = Math.round(latest)
 		this.overlay.textContent = `${ms}ms`
-		
+
 		// Color coding
 		this.overlay.className = 'profiler-overlay'
 		if (ms < 16) this.overlay.classList.add('good')
@@ -51,7 +63,7 @@ class LatencyProfiler {
 		this.overlay.className = 'profiler-overlay'
 		this.overlay.textContent = '0ms'
 		document.body.appendChild(this.overlay)
-		
+
 		this.toggle(this.isVisible)
 	}
 
@@ -63,12 +75,17 @@ class LatencyProfiler {
 	}
 
 	getMetrics() {
+		const totalLatency = this.getTotalLatency()
 		return {
-			latest: this.measurements[this.measurements.length - 1] || 0,
-			average: this.measurements.length ? 
-				this.measurements.reduce((a, b) => a + b, 0) / this.measurements.length : 0,
-			count: this.measurements.length,
-			all: [...this.measurements]
+			renderTime: {
+				latest: this.measurements[this.measurements.length - 1] || 0,
+				average: this.measurements.length ?
+					this.measurements.reduce((a, b) => a + b, 0) / this.measurements.length : 0,
+				count: this.measurements.length,
+				all: [...this.measurements]
+			},
+			totalLatency: totalLatency,
+			debounceTime: totalLatency ? totalLatency - (this.measurements[this.measurements.length - 1] || 0) : null
 		}
 	}
 }

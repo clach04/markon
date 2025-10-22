@@ -4,25 +4,35 @@ export const el = (tag, attrs = {}) => Object.assign(document.createElement(tag)
 const styles = `
 #toast {
 	position: fixed;
-	bottom: 16px;
+	bottom: 20px;
 	left: 50%;
 	color: var(--accent);
 	transform: translateX(-50%);
 	background: var(--bg-light);
-	border: 1px solid var(--accent-alpha);
-	padding: 12px 20px;
-	border-radius: 14px;
-	box-shadow: 0 4px 20px var(--accent-alpha);
-	backdrop-filter: blur(10px);
+	border: 2px solid var(--accent);
+	padding: 16px 24px;
+	border-radius: 16px;
+	box-shadow: 0 8px 32px var(--accent-alpha), 0 0 0 1px var(--accent-alpha);
+	backdrop-filter: blur(16px);
 	z-index: 1100;
 	max-width: 90vw;
 	white-space: nowrap;
 	opacity: 0;
-	transition: opacity 0.3s ease;
+	transition: all 0.3s ease;
+	font-size: 14px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }
 
 #toast:not([hidden]) {
 	opacity: 1;
+	transform: translateX(-50%) translateY(-4px);
+}
+
+#toast iconify-icon {
+	flex-shrink: 0;
 }
 
 `
@@ -34,8 +44,20 @@ document.head.appendChild(styleSheet)
 
 export const createToast =
 	toast =>
-	(msg, ms = 1_200) => {
-		toast.textContent = msg
+	(msg, ms = 1_200, icon = null) => {
+		// Clear existing content
+		toast.innerHTML = ''
+
+		// Add icon if provided
+		if (icon) {
+			const iconEl = el('iconify-icon', { icon, width: '18', height: '18' })
+			toast.appendChild(iconEl)
+		}
+
+		// Add text content
+		const textEl = el('span', { textContent: msg })
+		toast.appendChild(textEl)
+
 		toast.removeAttribute('hidden')
 		clearTimeout(window.__toastTimer)
 		window.__toastTimer = setTimeout(() => {
@@ -53,14 +75,14 @@ export const copySmart = async (text, notify) => {
 		ta.focus()
 		ta.select()
 		const ok = document.execCommand('copy')
-		notify(ok ? 'copied to clipboard' : 'copy failed')
+		notify(ok ? 'copied to clipboard' : 'copy failed', 1200, ok ? 'tabler:check' : 'tabler:alert-circle')
 		ta.remove()
 	}
 
 	return (
 		navigator.clipboard
 			?.writeText?.(text)
-			?.then(() => notify('copied to clipboard'))
+			?.then(() => notify('copied to clipboard', 1200, 'tabler:check'))
 			?.catch(fallback) ?? fallback()
 	)
 }

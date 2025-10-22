@@ -2,7 +2,7 @@
   "name": "markon",
   "private": true,
   "description": "Minimal Distraction‑free Markdown editor",
-  "version": "1.7.0",
+  "version": "1.8.1-1",
   "type": "module",
   "bugs": "https://github.com/metaory/markon/issues",
   "homepage": "https://metaory.github.io/markon/",
@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.1.4",
-    "vite-plugin-pwa": "^1.1.0",
-    "vite": "^7.1.11"
+    "vite": "^7.1.11",
+    "vite-plugin-pwa": "^1.1.0"
   },
   "dependencies": {
     "@codemirror/commands": "^6.6.2",
@@ -37,6 +37,7 @@
     "@lezer/highlight": "^1.2.0",
     "highlight.js": "^11.9.0",
     "iconify-icon": "3.0.0",
-    "marked": "^16.1.2"
+    "marked": "^16.1.2",
+    "morphdom": "^2.7.7"
   }
 }

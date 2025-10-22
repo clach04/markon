@@ -49,9 +49,7 @@ export const createEditor = async () => {
 	}
 
 	// Initialize storage and load content
-	const storedContent = localStorage.getItem('markon-content')
-	const initialContent = storedContent || await readDefaultMarkdown()
-
+	const initialContent = await readDefaultMarkdown()
 	make(initialContent)
 
 	// Initialize storage AFTER editor is created to avoid triggering on initial load
@@ -59,6 +57,14 @@ export const createEditor = async () => {
 		onMarkdownUpdated: fn => subscribers.push(fn),
 		initialContent: initialContent
 	})
+
+	// Load stored content from worker
+	const storedContent = storage.load()
+	if (storedContent) {
+		// Content will be set via worker message
+	} else {
+		// No stored content, use initial content
+	}
 
 	const getMarkdown = () => view.state.doc.toString()
 	const setMarkdown = markdown => {
@@ -68,6 +74,10 @@ export const createEditor = async () => {
 		notify()
 	}
 	const onMarkdownUpdated = fn => subscribers.push(fn)
+
+	// Expose global functions for worker
+	window.getMarkdown = getMarkdown
+	window.setMarkdown = setMarkdown
 
 	// Expose storage cleanup and profiler
 	const cleanup = () => storage?.cleanup()

@@ -1,5 +1,5 @@
 import { createButtons } from './actions.js'
-import { createSettingsDialog, createSettingsIcon } from './settings.js'
+import { createSettingsDialog } from './settings.js'
 import { observeTheme } from './syntax.js'
 import { setupHotkeys } from './hotkeys.js'
 import { createPreviewManager, createResizeHandler } from './resize.js'
@@ -16,13 +16,11 @@ export const initUI = async ({ getMarkdown, setMarkdown }) => {
 	const { theme, mode } = getPrefTheme()
 	await applyTheme(theme, mode)
 
-	// Setup buttons
-	createButtons(showToast)
-
 	// Setup settings system
-	const settingsDialog = createSettingsDialog()
-	const settingsIcon = createSettingsIcon(settingsDialog)
-	document.body.appendChild(settingsIcon)
+	const settingsDialog = createSettingsDialog(showToast)
+
+	// Setup all buttons (including settings)
+	createButtons(showToast, settingsDialog)
 
 	// Setup hotkeys
 	setupHotkeys(settingsDialog)

@@ -39,15 +39,10 @@ const boot = async () => {
 	window.addEventListener('beforeinstallprompt', event => {
 		event.preventDefault()
 		window.deferredPrompt = event
-		// Show install button
-		const installBtn = document.getElementById('install-pwa')
-		if (installBtn) installBtn.style.display = 'grid'
 	})
 
-	// Hide install button after successful install
+	// Clear install prompt after successful install
 	window.addEventListener('appinstalled', () => {
-		const installBtn = document.getElementById('install-pwa')
-		if (installBtn) installBtn.style.display = 'none'
 		window.deferredPrompt = null
 	})
 

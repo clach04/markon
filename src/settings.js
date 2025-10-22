@@ -1,20 +1,11 @@
-import { createClickHandler, createElement, applyTheme, getPrefTheme, extractThemesFromCSS, saveCustomThemesCSS, clearCustomThemesCSS, openFileCSS, downloadText } from './utils.js'
+import { createClickHandler, createElement, applyTheme, getPrefTheme, extractThemesFromCSS, saveCustomThemesCSS, clearCustomThemesCSS, openFileCSS, downloadText, copySmart, openFileText } from './utils.js'
+import { getActionHandlers, SETTINGS_ACTIONS, HOTKEYS } from './actions.js'
 import pkg from '../package.json'
 import './settings.css'
 
-const HOTKEYS = [
-	['ctrl+/', 'Open settings', 'settings'],
-	['ctrl+m', 'Toggle theme', 'toggle-theme'],
-	['ctrl+k', 'Toggle spell check', 'toggle-spell'],
-	['ctrl+p', 'Toggle preview', 'preview-toggle'],
-	['ctrl+shift+c', 'Copy to clipboard', 'copy-to-clipboard'],
-	['ctrl+s', 'Save to file', 'save-to-file'],
-	['ctrl+o', 'Open file', 'load-from-file'],
-	['ctrl+shift+v', 'Load from clipboard', 'load-from-clipboard'],
-]
 
 
-export const createSettingsDialog = () => {
+export const createSettingsDialog = (showToast) => {
 	const dialog = createElement('dialog', {
 		id: 'settings-system',
 		className: 'settings-dialog',
@@ -30,10 +21,9 @@ export const createSettingsDialog = () => {
 	const content = createElement('div', { className: 'settings-content' })
 
 	const themesSection = createThemesSection()
-	const performanceSection = createPerformanceSection()
-	const shortcutsSection = createShortcutsSection()
+	const actionsSection = createActionsSection(showToast)
 
-	content.append(themesSection, performanceSection, shortcutsSection)
+	content.append(themesSection, actionsSection)
 
 	const footer = createElement('div', { className: 'settings-footer' })
 	const heart = createElement('span', { className: 'heart', textContent: '❤️' })
@@ -78,11 +68,15 @@ export const createSettingsDialog = () => {
 	dialog.append(header, content, footer)
 
 	const show = () => {
-		document.body.appendChild(dialog)
+		// Only append if not already in DOM
+		if (!dialog.parentNode) {
+			document.body.appendChild(dialog)
+		}
 		dialog.showModal()
 		// Highlight current theme after dialog is shown
 		const themeGrid = dialog.querySelector('.settings-theme-grid')
 		if (themeGrid) highlightCurrentTheme(themeGrid)
+
 	}
 
 	const hide = () => {
@@ -102,157 +96,63 @@ export const createSettingsDialog = () => {
 	return { show, hide }
 }
 
-// Create configuration section
-const createPerformanceSection = () => {
-	const section = createElement('div', { className: 'settings-section' })
-	const sectionTitle = createElement('h3', { className: 'settings-section-title', textContent: 'Configuration' })
 
-	// Create two-column grid
-	const configGrid = createElement('div', {
+// Create unified actions and shortcuts section
+const createActionsSection = (showToast) => {
+	const section = createElement('div', { className: 'settings-section' })
+
+	const actionsGrid = createElement('div', {
 		className: 'settings-shortcuts',
 		style: 'grid-template-columns: repeat(2, 1fr);'
 	})
 
-	// Profiler toggle
-	const profilerToggle = createElement('div', { className: 'settings-item' })
-	const profilerLabel = createElement('span', {
-		textContent: 'Profiler',
-		style: 'font-weight: 500;'
-	})
-	const profilerBtn = createElement('button', {
-		className: 'settings-theme-control-btn',
-		id: 'toggle-profiler',
-		'aria-pressed': localStorage.getItem('markon-profiler-visible') === 'true',
-		style: 'background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2)); border: none;'
-	})
-
-	const profilerIcon = createElement('iconify-icon', {
-		icon: 'tabler:gauge-filled',
-		width: '16',
-		height: '16'
-	})
-	const profilerText = createElement('span', { textContent: 'Toggle' })
-	profilerBtn.append(profilerIcon, profilerText)
-
-	profilerToggle.append(profilerLabel, profilerBtn)
-
-	// Add click handler for profiler
-	createClickHandler(profilerBtn, () => {
-		const profiler = window.__MARKON_PERF__
-		if (profiler) {
-			profiler.toggle()
-			const isVisible = profiler.isVisible
-			profilerBtn.setAttribute('aria-pressed', String(isVisible))
-		}
-	})
-
-	// Spell check toggle
-	const spellToggle = createElement('div', { className: 'settings-item' })
-	const spellLabel = createElement('span', {
-		textContent: 'Spell Check',
-		style: 'font-weight: 500;'
-	})
-	const spellBtn = createElement('button', {
-		className: 'settings-theme-control-btn',
-		id: 'toggle-spell',
-		'aria-pressed': 'false',
-		style: 'background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2)); border: none;'
-	})
-
-	const spellIcon = createElement('iconify-icon', {
-		icon: 'tabler:file-text-filled',
-		width: '16',
-		height: '16'
-	})
-	const spellText = createElement('span', { textContent: 'Toggle' })
-	spellBtn.append(spellIcon, spellText)
-
-	spellToggle.append(spellLabel, spellBtn)
-
-	// Add click handler for spell check
-	createClickHandler(spellBtn, () => {
-		const pressed = spellBtn.getAttribute('aria-pressed') === 'true'
-		spellBtn.setAttribute('aria-pressed', String(!pressed))
-		document.getElementById('toggle-spell')?.click()
-	})
-
-	// Save file button
-	const saveToggle = createElement('div', { className: 'settings-item' })
-	const saveLabel = createElement('span', {
-		textContent: 'Save File',
-		style: 'font-weight: 500;'
-	})
-	const saveBtn = createElement('button', {
-		className: 'settings-theme-control-btn',
-		id: 'save-to-file',
-		style: 'background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.2)); border: none;'
-	})
-
-	const saveIcon = createElement('iconify-icon', {
-		icon: 'tabler:file-download-filled',
-		width: '16',
-		height: '16'
-	})
-	const saveText = createElement('span', { textContent: 'Save' })
-	saveBtn.append(saveIcon, saveText)
-
-	saveToggle.append(saveLabel, saveBtn)
-
-	// Add click handler for save
-	createClickHandler(saveBtn, () => {
-		document.getElementById('save-to-file')?.click()
-	})
-
-	// Load file button
-	const loadToggle = createElement('div', { className: 'settings-item' })
-	const loadLabel = createElement('span', {
-		textContent: 'Load File',
-		style: 'font-weight: 500;'
-	})
-	const loadBtn = createElement('button', {
-		className: 'settings-theme-control-btn',
-		id: 'load-from-file',
-		style: 'background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.2)); border: none;'
-	})
-
-	const loadIcon = createElement('iconify-icon', {
-		icon: 'tabler:file-upload-filled',
-		width: '16',
-		height: '16'
-	})
-	const loadText = createElement('span', { textContent: 'Load' })
-	loadBtn.append(loadIcon, loadText)
-
-	loadToggle.append(loadLabel, loadBtn)
-
-	// Add click handler for load
-	createClickHandler(loadBtn, () => {
-		document.getElementById('load-from-file')?.click()
-	})
-
-	configGrid.append(profilerToggle, spellToggle, saveToggle, loadToggle)
-	section.append(sectionTitle, configGrid)
-	return section
-}
-
-// Create shortcuts section
-const createShortcutsSection = () => {
-	const section = createElement('div', { className: 'settings-section' })
-	const sectionTitle = createElement('h3', { className: 'settings-section-title', textContent: 'Keyboard Shortcuts' })
-	const shortcuts = createElement('div', { className: 'settings-shortcuts' })
-
-	HOTKEYS.forEach(([key, desc]) => {
+	SETTINGS_ACTIONS
+		.filter(action => action.id !== 'install-pwa')
+		.forEach(({ id, label, icon, hotkey, gradient, handler }) => {
 		const item = createElement('div', { className: 'settings-item' })
-		item.append(
-			createElement('kbd', { className: 'settings-key', textContent: key }),
-			createElement('span', { className: 'settings-desc', textContent: desc }),
-		)
-		shortcuts.appendChild(item)
+
+		// Label
+		const labelSpan = createElement('span', {
+			textContent: label,
+			style: 'font-weight: 500; flex: 1; min-width: 0;'
+		})
+
+		// Button
+		const btn = createElement('button', {
+			className: 'settings-theme-control-btn',
+			id,
+			style: `background: ${gradient}; border: none; flex-shrink: 0; min-width: 80px;${id === 'install-pwa' ? ' display: none;' : ''}`
+		})
+		const btnIcon = createElement('iconify-icon', { icon, width: '16', height: '16' })
+		const btnText = createElement('span', {
+			textContent: id === 'github' ? 'Open'
+				: id.includes('toggle') || id.includes('profiler') ? 'Toggle'
+				: id.includes('save') ? 'Save'
+				: id.includes('load') ? 'Load'
+				: 'Run'
+		})
+		btn.append(btnIcon, btnText)
+		createClickHandler(btn, () => handler(showToast))
+
+		// Hotkey badge (only show if hotkey exists)
+		if (hotkey) {
+			const hotkeyKbd = createElement('kbd', {
+				className: 'settings-key',
+				textContent: hotkey,
+				style: 'flex-shrink: 0;'
+			})
+			item.append(labelSpan, btn, hotkeyKbd)
+		} else {
+			item.append(labelSpan, btn)
+		}
+
+		actionsGrid.appendChild(item)
 	})
 
-	section.append(sectionTitle, shortcuts)
+	section.append(actionsGrid)
 	return section
 }
+
 
 // Create themes section
 const createThemesSection = () => {
@@ -376,17 +276,6 @@ const highlightCurrentTheme = (themeGrid) => {
 }
 
 
-// Settings icon creation
-export const createSettingsIcon = settingsDialog => {
-	const icon = createElement('iconify-icon', {
-		icon: 'tabler:settings',
-		className: 'settings-icon',
-		title: 'Settings (Ctrl+/)',
-		width: '36',
-	})
-	createClickHandler(icon, () => settingsDialog.show())
-	return icon
-}
 
 // Export hotkeys for use in hotkeys module
 export { HOTKEYS }
