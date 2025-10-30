@@ -204,6 +204,12 @@ button {
   &#github:hover {
     color: var(--info) !important;
   }
+  &#install-pwa:hover {
+    color: var(--success) !important;
+  }
+  &#settings:hover {
+    color: var(--info) !important;
+  }
 }
 
 /* Mobile: Keep icon-only display on touch devices */

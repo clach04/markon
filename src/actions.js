@@ -53,7 +53,7 @@ const ACTIONS_CONFIG = [
 	{
 		id: 'toggle-spell',
 		label: 'Spell',
-		icon: 'tabler:file-text-filled',
+		icon: 'tabler:text-spellcheck',
 		hotkey: 'ctrl+k',
 		gradient: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.2))',
 		showInToolbar: false,
@@ -69,7 +69,7 @@ const ACTIONS_CONFIG = [
 	{
 		id: 'install-pwa',
 		label: 'Install',
-		icon: 'tabler:badges-filled',
+		icon: 'tabler:square-rounded-chevrons-down',
 		hotkey: '',
 		gradient: 'linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2))',
 		showInToolbar: true,
@@ -99,7 +99,7 @@ const ACTIONS_CONFIG = [
 	{
 		id: 'toggle-theme',
 		label: 'Theme',
-		icon: 'tabler:brightness-filled',
+		icon: 'tabler:contrast',
 		hotkey: 'ctrl+m',
 		gradient: 'linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.2))',
 		showInToolbar: true,
@@ -170,7 +170,7 @@ const ACTIONS_CONFIG = [
 	{
 		id: 'github',
 		label: 'GitHub',
-		icon: 'tabler:brand-github',
+		icon: 'tabler:brand-github-filled',
 		hotkey: '',
 		gradient: 'linear-gradient(135deg, rgba(107, 114, 128, 0.2), rgba(75, 85, 99, 0.2))',
 		showInToolbar: false,

@@ -15,7 +15,7 @@ export const createSettingsDialog = (showToast) => {
 	const header = createElement('div', { className: 'settings-header' })
 	const title = createElement('h2', { className: 'settings-title', textContent: 'Settings' })
 	const closeBtn = createElement('button', { className: 'settings-close' })
-	closeBtn.innerHTML = '<iconify-icon width="38" height="38" icon="tabler:x"></iconify-icon>'
+	closeBtn.innerHTML = '<iconify-icon width="38" height="38" icon="tabler:circle-x-filled"></iconify-icon>'
 	header.append(title, closeBtn)
 
 	const content = createElement('div', { className: 'settings-content' })
@@ -123,7 +123,7 @@ const createActionsSection = (showToast) => {
 			id,
 			style: `background: ${gradient}; border: none; flex-shrink: 0; min-width: 80px;${id === 'install-pwa' ? ' display: none;' : ''}`
 		})
-		const btnIcon = createElement('iconify-icon', { icon, width: '16', height: '16' })
+		const btnIcon = createElement('iconify-icon', { icon, width: '32', height: '32' })
 		const btnText = createElement('span', {
 			textContent: id === 'github' ? 'Open'
 				: id.includes('toggle') || id.includes('profiler') ? 'Toggle'
