@@ -3,7 +3,7 @@
     <img valign="middle" src="public/wordmark.png" alt="logo" height="64" />
   </h1>
   <strong>
-    Minimal distraction free local markdown live editor
+    Minimal distraction-free live Markdown editor
   </strong>
   <br>
   <h3>
