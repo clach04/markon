@@ -42,7 +42,7 @@ export default defineConfig({
 			manifest: {
 				name: 'markon',
 				short_name: 'markon',
-				description: 'Minimal Distraction‑free Markdown editor',
+				description: 'Minimal distraction-free live Markdown editor',
 				theme_color: '#0f11f0',
 				background_color: '#11e233',
 				display: 'standalone',
