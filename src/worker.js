@@ -63,16 +63,11 @@ const loadFromStorage = async () => {
 const debouncedSave = (content) => {
 	if (content === lastSavedContent) return
 
-	console.log('Worker: Scheduling save for', content.length, 'characters')
 	clearTimeout(debounceTimer)
 	debounceTimer = setTimeout(async () => {
-		console.log('Worker: Executing save...')
 		const success = await saveToStorage(content)
 		if (success) {
 			lastSavedContent = content
-			console.log('Worker: Save successful')
-		} else {
-			console.log('Worker: Save failed')
 		}
 	}, DEBOUNCE_MS)
 }

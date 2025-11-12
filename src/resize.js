@@ -3,22 +3,39 @@ import { createEventHandler, createElement, createClickHandler } from './utils.j
 const SNAP_THRESHOLD = 80
 
 const applySnap = (width, maxWidth) =>
-	width < SNAP_THRESHOLD ? 0 :
-	width > maxWidth - SNAP_THRESHOLD ? maxWidth : width
+	width < SNAP_THRESHOLD ? 0 : width > maxWidth - SNAP_THRESHOLD ? maxWidth : width
 
 const setPreviewWidth = (width, wrap) => {
 	const finalWidth = Math.max(width, 0)
 	wrap.style.gridTemplateColumns = `1fr 14px ${finalWidth}px`
 }
 
-export const createPreviewManager = (wrap) => {
+export const createPreviewManager = wrap => {
 	let _width = 300
-	const previewToggle = document.getElementById('preview-toggle')
+	const previewToggleIcon = document.getElementById('preview-toggle')
+
+	// Wrap iconify-icon in a button container (like toolbar buttons)
+	const previewToggle = createElement('button', {
+		className: 'preview-toggle',
+		id: 'preview-toggle-wrapper',
+	})
+
+	// Move the iconify-icon into the button
+	if (previewToggleIcon) {
+		previewToggleIcon.parentNode?.insertBefore(previewToggle, previewToggleIcon)
+		previewToggle.appendChild(previewToggleIcon)
+
+		// Add popover span with hotkey
+		const popoverSpan = createElement('span', {
+			textContent: 'Toggle • ctrl+p',
+		})
+		previewToggle.appendChild(popoverSpan)
+	}
 
 	const setWidth = newWidth => {
 		_width = newWidth
 		setPreviewWidth(newWidth, wrap)
-		previewToggle?.setAttribute('aria-pressed', String(newWidth > 0))
+		previewToggleIcon?.setAttribute('aria-pressed', String(newWidth > 0))
 	}
 
 	const toggle = () => setWidth(_width === 0 ? 400 : 0)
@@ -30,8 +47,12 @@ export const createPreviewManager = (wrap) => {
 	return {
 		toggle,
 		setWidth,
-		get width() { return _width },
-		set width(value) { _width = value }
+		get width() {
+			return _width
+		},
+		set width(value) {
+			_width = value
+		},
 	}
 }
 

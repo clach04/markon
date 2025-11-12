@@ -8,11 +8,108 @@ import {
   openFileText,
 } from "./utils.js";
 
+// Check if PWA is installed (running in standalone mode)
+const isPWAInstalled = () => {
+  if (window.matchMedia("(display-mode: standalone)").matches) return true;
+  if (window.navigator.standalone) return true;
+  if (localStorage.getItem("pwa-installed") === "true") return true;
+  return false;
+};
+
 // Update PWA install button visibility
 export const updatePWAInstallButton = () => {
   const btn = document.getElementById("install-pwa");
   if (!btn) return;
-  btn.style.display = window.deferredPrompt ? "flex" : "none";
+  const isInstalled = isPWAInstalled();
+  const shouldShow = window.deferredPrompt && !isInstalled;
+  btn.style.display = shouldShow ? "flex" : "none";
+};
+
+// Update both PWA UI elements
+export const updatePWAUI = () => {
+  updatePWAInstallButton();
+  updatePWAInstallBanner();
+};
+
+// Shared PWA install handler
+const handlePWAInstall = async (showToast) => {
+  if (!window.deferredPrompt) {
+    if (showToast) showToast("not available", 1200, "tabler:alert-circle");
+    return;
+  }
+  window.deferredPrompt.prompt();
+  const { outcome } = await window.deferredPrompt.userChoice;
+  window.deferredPrompt = null;
+  updatePWAUI();
+  if (showToast) {
+    const messages = {
+      accepted: { text: "installed!", icon: "tabler:check" },
+      dismissed: { text: "cancelled", icon: "tabler:x" },
+    };
+    const { text, icon } = messages[outcome] || messages.dismissed;
+    showToast(text, 1200, icon);
+  }
+  return outcome;
+};
+
+// Create PWA install banner
+const createPWAInstallBanner = () => {
+  const banner = createElement("div", {
+    id: "pwa-install-banner",
+    hidden: true,
+  });
+
+  const message = createElement("span", {
+    textContent: "Add Markon to your home screen for offline notes",
+    style: "flex: 1;",
+  });
+
+  const installBtn = createElement("button", {
+    textContent: "Install",
+    style: "padding: 8px 16px; border-radius: 8px; border: none; background: var(--accent); color: var(--bg); font-weight: 500; cursor: pointer;",
+  });
+
+  const dismissBtn = createElement("button", {
+    style: "padding: 8px; border: none; background: transparent; color: var(--text); cursor: pointer; display: flex; align-items: center;",
+  });
+  const dismissIcon = createElement("iconify-icon", {
+    icon: "solar:close-circle-bold-duotone",
+    width: "36",
+    height: "36",
+  });
+  dismissBtn.appendChild(dismissIcon);
+
+  banner.appendChild(message);
+  banner.appendChild(installBtn);
+  banner.appendChild(dismissBtn);
+
+  createClickHandler(installBtn, () => handlePWAInstall(window.showToast));
+
+  createClickHandler(dismissBtn, () => {
+    localStorage.setItem("pwa-banner-dismissed", "true");
+    updatePWAInstallBanner();
+  });
+
+  document.body.appendChild(banner);
+  return banner;
+};
+
+// Update PWA install banner visibility
+export const updatePWAInstallBanner = () => {
+  let banner = document.getElementById("pwa-install-banner");
+  if (!banner) {
+    banner = createPWAInstallBanner();
+  }
+
+  const isInstalled = isPWAInstalled();
+  const isDismissed = localStorage.getItem("pwa-banner-dismissed") === "true";
+  const shouldShow = window.deferredPrompt && !isInstalled && !isDismissed;
+
+  if (shouldShow) {
+    banner.removeAttribute("hidden");
+  } else {
+    banner.setAttribute("hidden", "");
+  }
 };
 
 // Unified actions configuration - single source of truth
@@ -76,21 +173,7 @@ const ACTIONS_CONFIG = [
     gradient:
       "linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2))",
     showInToolbar: true,
-    handler: async (showToast) => {
-      if (!window.deferredPrompt) {
-        showToast("not available", 1200, "tabler:alert-circle");
-        return;
-      }
-      window.deferredPrompt.prompt();
-      const { outcome } = await window.deferredPrompt.userChoice;
-      showToast(
-        outcome === "accepted" ? "installed!" : "cancelled",
-        1200,
-        outcome === "accepted" ? "tabler:check" : "tabler:x",
-      );
-      window.deferredPrompt = null;
-      updatePWAInstallButton();
-    },
+    handler: (showToast) => handlePWAInstall(showToast),
   },
   {
     id: "settings",
@@ -248,8 +331,8 @@ export const createButtons = (showToast, settingsDialog) => {
     actions.appendChild(btn);
   });
 
-  // Set initial PWA install button visibility
-  updatePWAInstallButton();
+  // Initialize PWA UI (always check, even if installed)
+  updatePWAUI();
 };
 
 // Export action handlers for reuse in settings

@@ -1,98 +1,121 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=0.2, maximum-scale=1.4, user-scalable=yes"
+    />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>markon</title>
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: #112233;
+        z-index: 1000;
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/logo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.2, maximum-scale=1.4, user-scalable=yes" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <title>markon</title>
-  <style>
-    #splash {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: #112233;
-      z-index: 1000;
-
-      img {
-        max-width: 80vw;
+        img {
+          max-width: 80vw;
+        }
       }
-    }
 
-    #splash::before {
-      content: "";
-      position: absolute;
-      width: 400px;
-      height: 100px;
-      background: #ff1188;
-      border-radius: 50%;
-      filter: blur(150px);
-      transform: translate(-40%, -50%);
-      top: 50%;
-      left: 50%;
-      z-index: -1;
-    }
+      #splash::before {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 100px;
+        background: #ff1188;
+        border-radius: 50%;
+        filter: blur(150px);
+        transform: translate(-40%, -50%);
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+      }
 
-    html.ready #splash {
-      display: none;
-    }
-  </style>
-  <meta name="description" content="Minimal distraction free local markdown live editor" />
-  <meta name="author" content="metaory">
-  <meta property="og:url" content="https://metaory.github.io/markon/">
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="markon" />
-  <meta property="og:description" content="Minimal distraction free local markdown live editor" />
-  <meta property="og:image" content="https://metaory.github.io/markon/screenshots.png">
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="markon" />
-  <meta name="twitter:description" content="Minimal distraction free local markdown live editor" />
-  <meta name="twitter:image" content="https://metaory.github.io/markon/screenshots.png" />
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#ff0011">
-</head>
+      html.ready #splash {
+        display: none;
+      }
+    </style>
+    <meta
+      name="description"
+      content="Minimal distraction-free live Markdown editor"
+    />
+    <meta name="author" content="metaory" />
+    <meta property="og:url" content="https://metaory.github.io/markon/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="markon" />
+    <meta
+      property="og:description"
+      content="Minimal distraction-free live Markdown editor"
+    />
+    <meta
+      property="og:image"
+      content="https://metaory.github.io/markon/screenshots.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="markon" />
+    <meta
+      name="twitter:description"
+      content="Minimal distraction-free live Markdown editor"
+    />
+    <meta
+      name="twitter:image"
+      content="https://metaory.github.io/markon/screenshots.png"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#ff0011" />
+  </head>
 
-<body>
-  <div id="splash"><img src="/wordmark.png" width="auto" alt="" /></div>
-  <div id="bar">
-    <div id="brand">
-      <img src="/wordmark.png" height="30" alt="" />
+  <body>
+    <div id="splash"><img src="/wordmark.png" width="auto" alt="" /></div>
+    <div id="bar">
+      <div id="brand">
+        <img src="/wordmark.png" height="30" alt="" />
+      </div>
+      <div id="actions"></div>
     </div>
-    <div id="actions"> </div>
-  </div>
-  <iconify-icon id="bar-pull" icon="tabler:chevrons-down" width="48"> </iconify-icon>
-  <div id="wrap">
-    <div id="editor"></div>
-    <div id="split" aria-label="Resize">
-      <iconify-icon
-        id="preview-toggle"
-        icon="tabler:square-toggle"
-        width="32"
-        class="preview-toggle"
-        aria-pressed="true"></iconify-icon>
-      <iconify-icon
-        id="resize-hover-icon"
-        icon="tabler:grip-vertical"
-        width="32"
-        class="resize-hover-icon"
-        style="pointer-events: none;"></iconify-icon>
-      <img
-        id="resize-handle"
-        src="/drag-handle.svg"
-        width="14"
-        height="50"
-        alt=""
-      />
+    <iconify-icon id="bar-pull" icon="tabler:chevrons-down" width="48">
+    </iconify-icon>
+    <div id="wrap">
+      <div id="editor"></div>
+      <div id="split" aria-label="Resize">
+        <iconify-icon
+          id="preview-toggle"
+          icon="tabler:square-toggle"
+          width="32"
+          class="preview-toggle"
+          aria-pressed="true"
+        ></iconify-icon>
+        <iconify-icon
+          id="resize-hover-icon"
+          icon="tabler:grip-vertical"
+          width="32"
+          class="resize-hover-icon"
+          style="pointer-events: none"
+        ></iconify-icon>
+        <img
+          id="resize-handle"
+          src="/drag-handle.svg"
+          width="14"
+          height="50"
+          alt=""
+        />
+      </div>
+      <aside id="preview">
+        <div id="previewhtml"></div>
+      </aside>
     </div>
-    <aside id="preview">
-      <div id="previewhtml"></div>
-    </aside>
-  </div>
-  <div id="toast" hidden></div>
-  <script type="module" src="/src/main.js"></script>
-  <script defer src="/ticks.js" data-website-id="436c17c6-f41c-4c25-a5f4-104a4bda47c1"></script>
-</body>
-
+    <div id="toast" hidden></div>
+    <script type="module" src="/src/main.js"></script>
+    <script
+      defer
+      src="/ticks.js"
+      data-website-id="436c17c6-f41c-4c25-a5f4-104a4bda47c1"
+    ></script>
+  </body>
 </html>

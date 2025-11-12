@@ -52,7 +52,6 @@ export const createStorage = ({ onMarkdownUpdated, initialContent = '' }) => {
 
 	if (storageWorker) {
 		isWorkerReady = true
-		console.log('Storage worker initialized')
 	}
 
 	const cleanup = () => {
@@ -80,10 +79,7 @@ export const createStorage = ({ onMarkdownUpdated, initialContent = '' }) => {
 	}
 
 	const debouncedSave = (content) => {
-		console.log('Storage: Received content update, length:', content.length)
 		if (storageWorker && isWorkerReady) {
-			// Send to worker for debounced processing
-			console.log('Storage: Sending to worker')
 			storageWorker.postMessage({ type: 'SAVE_CONTENT', content })
 		} else {
 			// No fallback - IndexedDB only

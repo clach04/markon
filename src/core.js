@@ -55,7 +55,7 @@ export const createEditor = async () => {
 	// Initialize storage AFTER editor is created to avoid triggering on initial load
 	storage = createStorage({
 		onMarkdownUpdated: fn => subscribers.push(fn),
-		initialContent: initialContent
+		initialContent: initialContent,
 	})
 
 	// Load stored content from worker
@@ -69,7 +69,9 @@ export const createEditor = async () => {
 	const getMarkdown = () => view.state.doc.toString()
 	const setMarkdown = markdown => {
 		const doc = markdown ?? ''
-		const tr = view.state.update({ changes: { from: 0, to: view.state.doc.length, insert: doc } })
+		const tr = view.state.update({
+			changes: { from: 0, to: view.state.doc.length, insert: doc },
+		})
 		view.update([tr])
 		notify()
 	}

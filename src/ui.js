@@ -46,6 +46,7 @@ export const initUI = async ({ getMarkdown, setMarkdown }) => {
 	window.getMarkdown = getMarkdown
 	window.setMarkdown = setMarkdown
 	window.previewManager = previewManager
+	window.showToast = showToast
 	window.readClipboardSmart = async () => {
 		const { readClipboardSmart } = await import('./utils.js')
 		return readClipboardSmart()

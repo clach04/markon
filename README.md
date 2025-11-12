@@ -16,10 +16,7 @@
   <img src="public/screenshots.png" alt="screenshot" width="80%" />
   <br> <br>
   <img src="public/themes.png" alt="themes" width="70%" />
-  <br>
-  <a href="https://metaory.github.io/markon/themes">themes</a>
 </div>
-
 
 ## Features
 
@@ -55,7 +52,6 @@
 - [x] **Shortcuts**: command palette
 - [x] **Theming**: custom CSS look
 - [x] **Theme Presets**: multiple presets in settings
-- [ ] **Scroll**: sync
 
 > [!NOTE]
 > _in no particular order_

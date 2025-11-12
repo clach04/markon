@@ -1,9 +1,8 @@
 # markon
 
-## minimal distraction free local markdown live editor
+## Minimal distraction-free live Markdown editor
 
 [metaory.github.io/markon](https://metaory.github.io/markon)
-
 
 ---
 
@@ -29,13 +28,11 @@
 - [x] **Shortcuts**: command palette
 - [x] **Theming**: custom CSS look
 - [x] **Theme Presets**: multiple presets in settings
-- [ ] **Scroll**: sync
 
 > [!NOTE]
 > _in no particular order_
 
 ---
-
 
 ### C
 
@@ -70,16 +67,16 @@ fn main() {
 
 ### Keyboard Shortcuts
 
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl/Cmd + S` | Save to file |
-| `Ctrl/Cmd + O` | Open file |
-| `Ctrl/Cmd + P` | Toggle preview |
-| `Ctrl/Cmd + M` | Toggle theme |
-| `Ctrl/Cmd + K` | Toggle spellcheck |
-| `Ctrl/Cmd + Shift + C` | Copy to clipboard |
+| Shortcut               | Action              |
+| ---------------------- | ------------------- |
+| `Ctrl/Cmd + S`         | Save to file        |
+| `Ctrl/Cmd + O`         | Open file           |
+| `Ctrl/Cmd + P`         | Toggle preview      |
+| `Ctrl/Cmd + M`         | Toggle theme        |
+| `Ctrl/Cmd + K`         | Toggle spellcheck   |
+| `Ctrl/Cmd + Shift + C` | Copy to clipboard   |
 | `Ctrl/Cmd + Shift + V` | Load from clipboard |
-| `Ctrl/Cmd + /` | Open settings |
+| `Ctrl/Cmd + /`         | Open settings       |
 
 > [!TIP]
 > All content is automatically saved to localStorage - no data loss!
@@ -101,6 +98,7 @@ fn main() {
 > Your content is automatically saved to your browser's localStorage as you type!
 
 **How it works:**
+
 - **Automatic**: Content saves instantly as you type - no manual save needed
 - **Persistent**: Your work survives browser restarts, crashes, and computer reboots
 - **Private**: Data stays on your device - never sent to any servers
@@ -109,13 +107,14 @@ fn main() {
 ### Managing Your Content
 
 **To save to a file:**
+
 1. Use `Ctrl/Cmd + S` to save as `.md` file to your computer
 2. Or copy content to clipboard and paste into any text editor
 
 **To load from a file:**
+
 1. Use `Ctrl/Cmd + O` to open existing `.md` files
 2. Content will automatically load and start auto-saving
-
 
 > [!NOTE]
 > LocalStorage is per-browser and per-device. Content won't sync across different browsers or computers.
@@ -127,30 +126,38 @@ fn main() {
 ### Headings
 
 # H1 Heading
+
 ## H2 Heading
+
 ### H3 Heading
+
 #### H4 Heading
+
 ##### H5 Heading
+
 ###### H6 Heading
 
 ### Text Formatting
 
-This is **bold text**, *italic text*, ~~strikethrough~~, `inline code`, and a [link](https://github.com/metaory/markon).
+This is **bold text**, _italic text_, ~~strikethrough~~, `inline code`, and a [link](https://github.com/metaory/markon).
 
 ### Lists
 
 **Unordered:**
+
 - First item
 - Second item
   - Nested item
   - Another nested item
 
 **Ordered:**
+
 1. First step
 2. Second step
 3. Third step
 
 **Task Lists:**
+
 - [x] Completed task
 - [ ] Pending task
 - [ ] Another pending task
@@ -166,7 +173,7 @@ function greet(name) {
   return `Welcome to markon`;
 }
 
-greet('Developer');
+greet("Developer");
 ```
 
 ```python
@@ -199,12 +206,12 @@ npm run dev
 
 ### Tables
 
-| Feature | Status | Notes |
-|---------|--------|-------|
-| GFM Support | ✅ | Full GitHub Flavored Markdown |
-| Syntax Highlighting | ✅ | 250+ languages |
-| Local Storage | ✅ | Auto-save enabled |
-| Themes | ✅ | Multiple presets |
+| Feature             | Status | Notes                         |
+| ------------------- | ------ | ----------------------------- |
+| GFM Support         | ✅     | Full GitHub Flavored Markdown |
+| Syntax Highlighting | ✅     | 250+ languages                |
+| Local Storage       | ✅     | Auto-save enabled             |
+| Themes              | ✅     | Multiple presets              |
 
 ### Blockquotes
 
@@ -237,6 +244,7 @@ npm run dev
 This content is hidden by default but can be revealed by clicking the summary.
 
 You can include any markdown content here:
+
 - Lists
 - **Bold text**
 - `Code snippets`
@@ -251,20 +259,20 @@ echo "Even code blocks work!"
 
 ---
 
-
 ## Advanced Features
 
 ### Split View Resizing
 
 The editor features intelligent split view resizing:
+
 - **Snap Threshold**: Resizing snaps to edges when close to boundaries
 - **Smooth Dragging**: Fluid resize experience
 - **Memory**: Remembers your preferred split ratio
 
 ### Theme System
 
-
 Multiple theme presets available:
+
 - Light themes for bright environments
 - Dark themes for low-light usage
 - High contrast options for accessibility
@@ -274,6 +282,4 @@ Multiple theme presets available:
 
 ---
 
-*Happy writing with markon!* ✨
-
-
+_Happy writing with markon!_ ✨
