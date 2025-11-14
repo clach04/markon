@@ -458,8 +458,8 @@ html[data-theme="tokyo-night"][data-mode="dark"] {
 }
 
 html[data-theme="tokyo-night"][data-mode="light"] {
-	--bg: #d5d6db;
-	--bg-light: #e1e2e7;
+	--bg: #e8e9ed;
+	--bg-light: #ffffff;
 	--text: #2d3748;
 	--brand: #e53e3e;
 	--accent: #3182ce;
