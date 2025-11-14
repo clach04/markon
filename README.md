@@ -13,6 +13,8 @@
   <a href="https://metaory.github.io/markon">
     <img src="https://img.shields.io/badge/PWA-Installable-blue?style=for-the-badge&logo=pwa&logoColor=white" alt="PWA Installable" />
   </a>
+  <img src="public/screenshots-panda.png" alt="screenshot" width="80%" />
+    <br>
   <img src="public/screenshots.png" alt="screenshot" width="80%" />
   <br> <br>
   <img src="public/themes.png" alt="themes" width="70%" />
