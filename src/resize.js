@@ -62,14 +62,26 @@ export const createResizeHandler = (split, previewAside, wrap, previewManager) =
 
 	split.classList.add('active')
 
+	let pendingWidth = null
+	let rafId = null
+
+	const applyPending = () => {
+		if (pendingWidth == null) {
+			rafId = null
+			return
+		}
+		setPreviewWidth(pendingWidth, wrap)
+		if (previewManager) previewManager.width = pendingWidth
+		pendingWidth = null
+		rafId = null
+	}
+
 	const onMove = ev => {
 		const dx = startX - ev.clientX
-		const newWidth = startWidth + dx
-		const clampedWidth = Math.max(0, newWidth)
-		setPreviewWidth(clampedWidth, wrap)
+		pendingWidth = Math.max(0, startWidth + dx)
 
-		if (previewManager) {
-			previewManager.width = clampedWidth
+		if (!rafId) {
+			rafId = requestAnimationFrame(applyPending)
 		}
 	}
 
