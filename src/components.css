@@ -299,6 +299,49 @@ button {
     margin: 0.6em 0 0.6em 1.2em;
   }
 
+  /* Checkboxes */
+  input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
+    border: 2px solid var(--comment);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-alpha);
+  }
+
+  input[type="checkbox"]:checked::before {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--bg-light);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  input[type="checkbox"]:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 4px var(--accent-alpha);
+  }
+
+  input[type="checkbox"]:checked:hover {
+    box-shadow: 0 0 12px var(--accent-alpha);
+  }
+
   blockquote {
     margin: 0.8em 0;
     padding-left: 1em;
