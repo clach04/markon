@@ -428,6 +428,86 @@ button {
   }
 }
 
+/* ===== TOC COMPONENTS ===== */
+
+#toc-wrapper {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 100;
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  width: fit-content;
+  height: fit-content;
+  pointer-events: none;
+}
+
+#toc-wrapper > * {
+  pointer-events: auto;
+}
+
+#toc-button {
+  color: var(--comment);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--bg-alpha);
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+  padding: 6px;
+  display: grid;
+  place-items: center;
+}
+
+#toc-button:hover {
+  opacity: 1;
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+#toc-dropdown {
+  min-width: 180px;
+  max-width: 250px;
+  max-height: 50vh;
+  overflow-y: auto;
+  background: var(--bg-alpha);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px var(--shadow-strong);
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--text-alpha);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  padding: 4px 2px;
+}
+
+.toc-item {
+  font-size: 0.75rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+  line-height: 1.4;
+}
+
+.toc-item:hover {
+  color: var(--primary);
+  background: var(--text-alpha);
+}
+
+.toc-empty {
+  font-size: 0.75rem;
+  color: var(--comment);
+  text-align: center;
+  padding: 8px;
+}
+
 /* ===== RESIZE COMPONENTS ===== */
 
 /* Preview toggle button */

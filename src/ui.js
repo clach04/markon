@@ -4,6 +4,7 @@ import { observeTheme } from './syntax.js'
 import { setupHotkeys } from './hotkeys.js'
 import { createPreviewManager, createResizeHandler } from './resize.js'
 import createToolbar from './toolbar.js'
+import { createTOC } from './toc.js'
 import { applyTheme, createPointerHandler, createToast, getPrefTheme } from './utils.js'
 
 // Initialize UI components
@@ -41,6 +42,13 @@ export const initUI = async ({ getMarkdown, setMarkdown }) => {
 
 	// Setup toolbar with auto-hide behavior
 	createToolbar()
+
+	// Setup TOC
+	const previewHtml = document.getElementById('previewhtml')
+	const previewContainer = document.getElementById('preview')
+	if (previewHtml && previewContainer) {
+		createTOC(previewHtml, previewContainer)
+	}
 
 	// Expose markdown functions globally for button access
 	window.getMarkdown = getMarkdown
