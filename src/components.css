@@ -83,8 +83,8 @@
   justify-content: end;
   min-width: 0;
   overflow: visible;
-  padding-right: 36px;
-  transition: padding-right .5s ease;
+  padding-right: 46px;
+  transition: padding-right 0.5s ease;
 }
 
 #bar.open #actions {
@@ -535,7 +535,9 @@ button {
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 8px;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   line-height: 1.4;
 }
 

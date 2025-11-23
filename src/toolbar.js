@@ -2,7 +2,7 @@ const createToolbar = () => {
 	const delay = 1_000
 	const toolShowTop = '0px'
 	const pullShowTop = '0px'
-	const toolHideTop = '-42px'
+	const toolHideTop = '-40px'
 	const pullHideTop = '-40px'
 	let hideTimer
 
